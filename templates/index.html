@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
 </head>
+
 <body>
 
     <div id="loginScreen">
@@ -24,7 +26,7 @@
             </div>
 
             <button class="play-button">
-                <img src="{{ url_for('static', filename='IMAGES/playBtn.png') }}" alt="PLAY">
+                <img src="{{ url_for('static', filename='IMAGES/LoginBtn.png') }}" alt="PLAY">
             </button>
         </div>
 
@@ -37,5 +39,40 @@
         </div>
     </div>
 
-    </body>
+    <div id="scoreScreen" style="display: none;">
+        <a href="#" class="hitbox hitbox-option" title="Retour au Menu"></a>
+        <a href="#" class="hitbox hitbox-game" title="Lancer le Jeu"></a>
+
+        <div class="score-container">
+            <h1 class="game-title">Hunt the wumpus</h1>
+
+            <div class="leaderboard-box">
+                <div class="podium-wrapper">
+                    <img src="{{ url_for('static', filename='IMAGES/podium.png') }}" class="podium-img" alt="Podium">
+
+                    <div class="player p2">
+                        <span class="name">Profil 1</span>
+                        <img src="{{ url_for('static', filename='IMAGES/2.png') }}" class="avatar">
+                    </div>
+
+                    <div class="player p1">
+                        <span class="name">Profil 2</span>
+                        <img src="{{ url_for('static', filename='IMAGES/1.png') }}" class="avatar">
+                    </div>
+
+                    <div class="player p3">
+                        <span class="name">Profil 3</span>
+                        <img src="{{ url_for('static', filename='IMAGES/3.png') }}" class="avatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="credits-postit">
+            Théo Durant<br>Augustin<br>Déllicieux
+        </div>
+    </div>
+
+</body>
+
 </html>
