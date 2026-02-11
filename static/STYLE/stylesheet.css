@@ -1,0 +1,150 @@
+
+/* Déclaration police */
+/* Standard */
+@font-face {
+    font-family: 'Doto';
+    src: url('../ASSETS/FONT/Doto/static/Doto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*  Grasse */
+@font-face {
+    font-family: 'Doto';
+    src: url('../ASSETS/FONT/Doto/static/Doto-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Rounded */
+@font-face {
+    font-family: 'DotoRounded';
+    src: url('../ASSETS/FONT/Doto/static/Doto_Rounded-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Doto', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* --- LOGIN SCREEN --- */
+#loginScreen {
+    background-image: url('../IMAGES/bg.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #f0f14e; 
+    position: relative; 
+}
+
+/* --- Titre jeu --- */
+.game-title {
+    font-family: 'Doto', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    text-shadow: 4px 4px 0px #000, -2px -2px 0px #000; 
+    letter-spacing: 2px;
+}
+
+/* --- Formulaire --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.input-group label {
+    font-family: 'Doto', sans-serif;
+    font-size: 1rem;
+    text-align: left;
+}
+
+/* inputs */
+.input-group input {
+    font-family: 'Courier New', Courier, monospace; 
+    background-color: rgba(200, 50, 80, 0.6); 
+    border: 3px dashed #a02040; 
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+.input-group input:focus {
+    border-color: #f0f14e; 
+    box-shadow: 0 0 10px #f0f14e;
+}
+
+/* --- Bouton PLAY --- */
+.play-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    align-self: center;
+    transition: transform 0.1s ease-in-out;
+}
+
+.play-button img {
+    width: 120px; 
+    display: block;
+}
+
+.play-button:hover {
+    transform: scale(1.1); 
+}
+.play-button:active {
+    transform: scale(0.95);
+}
+
+/* --- Post-it Crédits --- */
+.credits-postit {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff99cc; 
+    color: #f0f14e; 
+    padding: 15px 20px;
+    font-family: sans-serif; 
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transform: rotate(-5deg); 
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    text-align: right;
+}
+
+/* scotch postite */
+.credits-postit::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 40%;
+    width: 30px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: rotate(5deg);
+}

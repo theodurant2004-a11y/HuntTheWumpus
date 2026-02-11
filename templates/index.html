@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hunt the Wumpus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
 </head>
 <body>
-    <h1>TEST DE LA PREMIERE PAGE</h1>
-</body>
+
+    <div id="loginScreen">
+        <h1 class="game-title">Hunt the wumpus</h1>
+
+        <div class="login-form">
+            <div class="input-group">
+                <label for="login">Login :</label>
+                <input type="text" id="login" name="login" placeholder="monmail@gmail.com">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password :</label>
+                <input type="password" id="password" name="password" placeholder="••••••••••••">
+            </div>
+
+            <button class="play-button">
+                <img src="{{ url_for('static', filename='IMAGES/playBtn.png') }}" alt="PLAY">
+            </button>
+        </div>
+
+        <div class="credits-postit">
+            Théo Durant
+            <br>
+            Augustin
+            <br>
+            Déllicieux
+        </div>
+    </div>
+
+    </body>
 </html>
