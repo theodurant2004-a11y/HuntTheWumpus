@@ -4,12 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunt the Wumpus</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Le serveur fonctionne !</h1>
-        <p>Prêt pour chasser le Wumpus.</p>
+    <div id="loginScreen">
+        <h1 class="game-title">Hunt the wumpus</h1>
+        <form action=""class="login-form">
+            <div class="input-group">
+                <label for="login">Login :</label>
+                <input type="text" id="login" name="login" placeholder="monmail@gmail.com">
+            </div>
+            <div class="input-group">
+                <label for="password">Password :</label>
+                <input type="password" id="password" name="password" placeholder="••••••••••••">
+            </div>
+            <a class="play-button" href="{{ url_for('podiumScreen') }}">
+                <img src="{{ url_for('static', filename='IMAGES/LoginBtn.png') }}" alt="PLAY">
+            </a>
+        </form>
+
+        <div class="credits-postit">
+            Théo Durant
+            <br>
+            Augustin
+            <br>
+            Déllicieux
+        </div>
     </div>
 </body>
+
 </html>
