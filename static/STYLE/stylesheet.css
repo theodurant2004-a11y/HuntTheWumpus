@@ -1,17 +1,28 @@
 /* Déclaration police */
 @font-face {
-    font-family: 'Doto';
+    font-family: 'Doto-regular';
     src: url('../ASSETS/FONT/Doto/static/Doto-Regular.ttf') format('truetype');
     font-weight: 400; /* Regular */
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Doto';
+    font-family: 'Doto-Bold';
     src: url('../ASSETS/FONT/Doto/static/Doto-Bold.ttf') format('truetype');
     font-weight: 700; /* Bold */
     font-style: normal;
 }
+@font-face {
+    font-family: 'Doto-SemiBold';
+    src: url('../ASSETS/FONT/Doto/static/Doto-SemiBold.ttf') format('truetype');
+    font-weight: 600; /* Bold */
+}
+@font-face {
+    font-family: 'Tourney-LightItalic';
+    src: url('../ASSETS/FONT/Tourney/static/Tourney-LightItalic.ttf') format('truetype');
+    font-weight: 3003; /* Bold */
+}
+
 
 /* Reset de base */
 * {
@@ -74,7 +85,8 @@ body {
 
 /* --- Titre jeu --- */
 .game-title {
-    font-family: 'Doto', sans-serif;
+    font-family: 'Doto-SemiBold', sans-serif;
+    color: #f0f14e;
     font-weight: 400;
     font-size: 3.5rem;
     text-transform: uppercase;
@@ -107,10 +119,11 @@ body {
 }
 
 .input-group label {
-    font-family: 'Doto', sans-serif;
-    font-size: 1.2rem;
+    font-family: 'Doto-regular', sans-serif;
+    font-size: 1.7rem;
     text-align: left;
 }
+
 
 /* inputs */
 .input-group input {
@@ -139,12 +152,10 @@ body {
     image-rendering: pixelated;
     display: inline-block;
 }
-
 .play-button img {
     width: 140px;
     display: block;
 }
-
 .play-button:hover { transform: scale(1.1); }
 .play-button:active { transform: scale(0.95); }
 
@@ -153,19 +164,18 @@ body {
     background-image: url('../IMAGES/bg_clear.png');
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; 
+    padding-top: 120px; 
     align-items: center;
     position: relative;
 }
-
-/* Reprise du style "Boîte Noire" du login */
 .leaderboard-box {
-    background-color: rgba(0, 0, 0, 0.6); 
-    padding: 30px 50px;
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 30px 50px 0 50px;
     border-radius: 10px;
     border: 1px solid rgba(240, 241, 78, 0.3);
     backdrop-filter: blur(4px);
@@ -173,51 +183,74 @@ body {
     flex-direction: column;
     align-items: center;
     z-index: 5;
+    overflow: hidden;
+    height: 100%;
+    width: 90%; 
+    max-width: 1200px; 
 }
 
-/* Gestion du podium image */
+/* podium */
 .podium-wrapper {
     position: relative;
-    margin-top: 20px;
+    margin-top: auto;
+    width: 80%; 
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 .podium-img {
-    width: 450px; /* Ajuste la taille selon ton envie */
+    width: 100%;
     display: block;
-    image-rendering: pixelated;
+    margin-bottom: -5px; 
 }
 
-/* Positionnement des joueurs */
+/* Positionnement joueurs */
 .player {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
+    transform: translateX(-50%);
 }
-
 .player .name {
-    font-family: 'Doto', sans-serif;
-    font-size: 0.9rem;
-    color: #ff99cc; /* Rose comme ton modèle */
-    margin-bottom: 5px;
+    font-family: 'Tourney-LightItalic', sans-serif;
+    font-size: 1rem;
+    color: 	#6ded8a; 
+    margin-bottom: 1px;
 }
-
 .player .avatar {
-    width: 50px;
+    width: 100%;
+    height: auto;
     image-rendering: pixelated;
 }
 
-/* On cale chaque profil au dessus de sa marche */
-.p1 { top: -85px; left: 50%; transform: translateX(-50%); } /* Milieu (1er) */
-.p2 { top: -65px; left: 7%; }  /* Gauche (2eme) */
-.p3 { top: -45px; right: 7%; } /* Droite (3eme) */
+/* Milieu - 1 */
+.p1 { 
+    left: 51%;     
+    bottom: 92%;
+    z-index: 10;
+    width: 120px;
+}
+
+/* Gauche -  2 */
+.p2 { 
+    left: 25%;     
+    bottom: 70%;
+    width: 95px;
+}
+
+/*  Droite -  3 */
+.p3 { 
+    left: 75%;     
+    bottom: 65%;
+    width: 80px;   
+}
 
 /* Hitboxes pour cliquer sur le décor */
 .hitbox {
     position: absolute;
     z-index: 100;
-    /* background: rgba(255,0,0,0.2);  <-- Décommente pour ajuster */
+    background: rgba(255,0,0,0.2);
 }
 .hitbox-option { top: 5%; left: 1%; width: 140px; height: 400px; }
 .hitbox-game { top: 8%; right: 1%; width: 200px; height: 150px; }

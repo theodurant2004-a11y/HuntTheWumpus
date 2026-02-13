@@ -10,25 +10,21 @@
 </head>
 
 <body>
-
     <div id="loginScreen">
         <h1 class="game-title">Hunt the wumpus</h1>
-
-        <div class="login-form">
+        <form action=""class="login-form">
             <div class="input-group">
                 <label for="login">Login :</label>
                 <input type="text" id="login" name="login" placeholder="monmail@gmail.com">
             </div>
-
             <div class="input-group">
                 <label for="password">Password :</label>
                 <input type="password" id="password" name="password" placeholder="••••••••••••">
             </div>
-
-            <button class="play-button">
+            <a class="play-button" href="{{ url_for('podiumScreen') }}">
                 <img src="{{ url_for('static', filename='IMAGES/LoginBtn.png') }}" alt="PLAY">
-            </button>
-        </div>
+            </a>
+        </form>
 
         <div class="credits-postit">
             Théo Durant
@@ -38,41 +34,6 @@
             Déllicieux
         </div>
     </div>
-
-    <div id="scoreScreen" style="display: none;">
-        <a href="#" class="hitbox hitbox-option" title="Retour au Menu"></a>
-        <a href="#" class="hitbox hitbox-game" title="Lancer le Jeu"></a>
-
-        <div class="score-container">
-            <h1 class="game-title">Hunt the wumpus</h1>
-
-            <div class="leaderboard-box">
-                <div class="podium-wrapper">
-                    <img src="{{ url_for('static', filename='IMAGES/podium.png') }}" class="podium-img" alt="Podium">
-
-                    <div class="player p2">
-                        <span class="name">Profil 1</span>
-                        <img src="{{ url_for('static', filename='IMAGES/2.png') }}" class="avatar">
-                    </div>
-
-                    <div class="player p1">
-                        <span class="name">Profil 2</span>
-                        <img src="{{ url_for('static', filename='IMAGES/1.png') }}" class="avatar">
-                    </div>
-
-                    <div class="player p3">
-                        <span class="name">Profil 3</span>
-                        <img src="{{ url_for('static', filename='IMAGES/3.png') }}" class="avatar">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="credits-postit">
-            Théo Durant<br>Augustin<br>Déllicieux
-        </div>
-    </div>
-
 </body>
 
 </html>
