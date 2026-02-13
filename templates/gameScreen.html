@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunt the wumpus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
 </head>
 <body>
-    <h1>Page de jeu !!!</h1>
+    <div id="maze_screen">
+        <table class="maze_table">
+            {% for col in maze %}
+                <tr class="maze_tr">
+                    {% for unit in col %}
+                    <td class=case_type_{{unit}}></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>
