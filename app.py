@@ -1,4 +1,5 @@
 from flask import Flask, render_template 
+from wumpus_engine import mazeGeneration
 
 app = Flask(__name__)
 
@@ -12,7 +13,8 @@ def podiumScreen():
 
 @app.route('/gameScreen')
 def gameScreen():
-    return render_template('gameScreen.html')
+    maze = mazeGeneration.generateMaze(1)
+    return render_template('gameScreen.html', maze=maze)
 
 if __name__ == '__main__':
     app.run(debug=True)
