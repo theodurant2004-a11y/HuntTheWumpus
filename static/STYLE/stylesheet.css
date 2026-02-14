@@ -29,7 +29,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: url('../IMAGES/cursor.png') 4 4, auto;
+    cursor: url('../ASSETS/IMAGES/usable/cursor.png') 4 4, auto;
 }
 
 body {
@@ -70,7 +70,7 @@ body {
 
 /* --- LOGIN SCREEN --- */
 #loginScreen {
-    background-image: url('../IMAGES/bg.png');
+    background-image: url('../ASSETS/IMAGES/background/bg.png');
     background-size: cover;
     background-position: center;
     height: 100%;
@@ -161,7 +161,7 @@ body {
 
 /* --- SCORE SCREEN --- */
 #scoreScreen {
-    background-image: url('../IMAGES/bg_clear.png');
+    background-image: url('../ASSETS/IMAGES/background/bg_clear.png');
     background-size: cover;
     background-position: center;
     height: 100%;
