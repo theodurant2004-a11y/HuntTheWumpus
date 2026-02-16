@@ -10,17 +10,19 @@
 </head>
 
 <body>
-
     <div id="scoreScreen">
-        <a href="#" class="hitbox hitbox-option" title="Retour au Menu"></a>
-        <a href="{{ url_for('gameScreen') }}" class="hitbox hitbox-game" title="Lancer le Jeu"></a>
 
-        <div class="score-container">
+        <div class="background-bridge">
+
+            <a href="#" class="hitbox hitbox-option" title="Retour au Menu"></a>
+            <a href="{{ url_for('gameScreen') }}" class="hitbox hitbox-game" title="Lancer le Jeu"></a>
+
             <h1 class="game-title">Hunt the wumpus</h1>
 
             <div class="leaderboard-box">
                 <div class="podium-wrapper">
-                    <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/podium.png') }}" class="podium-img" alt="Podium">
+                    <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/podium.png') }}"
+                        class="podium-img" alt="Podium">
 
                     <div class="player p2">
                         <span class="name">Profil 1</span>
@@ -38,13 +40,13 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
         <div class="credits-postit">
-            Théo Durant<br>Augustin<br>Déllicieux
+            Théo du rang<br>Augustin<br>Déllicieux
         </div>
-    </div>
 
+    </div>
 </body>
 
 </html>

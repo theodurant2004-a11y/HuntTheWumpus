@@ -1,0 +1,78 @@
+/* On s'assure que le bridge gère bien ses enfants */
+.background-bridge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    
+    background-image: url('../ASSETS/IMAGES/background/bg_clear.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    max-width: 177.78vh; 
+    max-height: 56.25vw;
+    z-index: 1;
+    
+    /* ASTUCE MODERNE : Permet d'adapter la taille du texte à la boite */
+    container-type: size; 
+}
+
+/* --- LE TITRE --- */
+.game-title {
+    position: absolute; /* On le sort du flux normal */
+    top: 10%;           /* Place le titre à 10% du haut de l'IMAGE */
+    left: 0;
+    width: 100%;        /* Prend toute la largeur de l'image */
+    text-align: center;
+    
+    font-family: 'Doto-SemiBold', sans-serif;
+    color: #f0f14e;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px #000;
+    z-index: 5;
+    
+    /* Taille de police dynamique relative à la hauteur du conteneur (cqh) */
+    /* Si le navigateur est vieux, on met une taille en vh en secours */
+    font-size: 8vh; 
+    font-size: 10cqh; 
+    margin: 0; /* Important pour éviter les décalages */
+}
+
+/* --- LEADERBOARD --- */
+.leaderboard-box {
+    position: absolute;
+    /* On le centre par rapport à l'image */
+    top: 58%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* On lui donne une largeur en % de l'image pour ne pas toucher les bords */
+    width: 50%; 
+    height: auto;
+    
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding: 2% 3%; /* Padding en % aussi ! */
+    border-radius: 10px;
+    border: 1px solid rgba(240, 241, 78, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    
+    display: flex;
+    justify-content: center;
+}
+
+/* On s'assure que le podium reste dedans */
+.podium-wrapper {
+    width: 100%; 
+    max-width: none; /* On enlève la limite fixe en px */
+    margin: 0;
+}
+
+/* Ajustement des noms des joueurs pour qu'ils réduisent aussi */
+.player .name {
+    font-size: 2cqh; /* Taille relative à la hauteur de l'image */
+}
