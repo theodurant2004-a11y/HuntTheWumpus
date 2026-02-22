@@ -355,3 +355,35 @@ body {
 .case_type_7 {
     background-image: url("../ASSETS/IMAGES/mazeImages/Case.png"), url("../ASSETS/IMAGES/mazeImages/Wumpus.png");
 }
+
+/* --- case avec joueur --- */
+
+.case_type_0.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/Case.png");
+    background-size: 20%, 100%;
+}
+
+.case_type_1.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/Path1.png");
+    background-size: 20%, 100%;
+}
+
+.case_type_2.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/Path2.png");
+    background-size: 20%, 100%;
+}
+
+.case_type_4.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/CaseG.png");
+    background-size: 20%, 100%;
+}
+
+.case_type_5.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/WumpusDot.png"), url("../ASSETS/IMAGES/mazeImages/Case.png");
+    background-size: 20%, 50%, 100%;
+}
+
+.case_type_6.player_visible {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png"), url("../ASSETS/IMAGES/mazeImages/WumpusDot.png"), url("../ASSETS/IMAGES/mazeImages/CaseG.png");
+    background-size: 20%, 50%, 100%;
+}
