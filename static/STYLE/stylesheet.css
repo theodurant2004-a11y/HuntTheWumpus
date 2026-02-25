@@ -104,28 +104,38 @@ body {
     width: 100%;
     max-width: 450px;
     z-index: 5;
-    
     background-color: rgba(0, 0, 0, 0.6); 
-    padding: 40px 40px 10px 40px;
+    padding: 1% 5% 1% 5%;
     border-radius: 10px;
     border: 1px solid rgba(240, 241, 78, 0.3);
     backdrop-filter: blur(4px);
 }
+.login-form h2{
+    color: 	#ff5f85; 
+    text-align: center; 
+    font-family: 'Doto-regular', sans-serif; 
+}
+.login-form p{
+    text-align: center; 
+    margin: 5%
+}
+.sign-in{
+    color: #f0f14e; 
+    margin-top: -50%;
+    font-family: 'Tourney-LightItalic';
+}
 
+/* inputs */
 .input-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .input-group label {
     font-family: 'Doto-regular', sans-serif;
     font-size: 1.7rem;
     text-align: left;
 }
-
-
-/* inputs */
 .input-group input {
     font-family: 'Courier New', Courier, monospace;
     background-color: rgba(200, 50, 80, 0.4);
@@ -135,7 +145,6 @@ body {
     font-size: 1.1rem;
     outline: none;
 }
-
 .input-group input:focus {
     border-color: #f0f14e;
     box-shadow: 0 0 15px rgba(240, 241, 78, 0.5);
@@ -146,7 +155,8 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 5%;
+    margin-bottom: -10%;
     align-self: center;
     transition: transform 0.1s ease-in-out;
     image-rendering: pixelated;
@@ -284,21 +294,37 @@ body {
     position: absolute;
     z-index: 100;
     cursor: pointer;
-    background: rgba(255, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+    /* background: rgba(255, 0, 0, 0.5); */
 }
 .hitbox-option {
-    top: 22.5%; 
+    top: 24.3%; 
     left: 14.8%;
-    width: 4.8%; 
+    width: 5%; 
     height: 38%;
     transform: translate(-50%, -50%);
 }
+.hitbox-option:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.8), 
+                0 0 40px rgba(255, 0, 255, 0.6);
+
+    background-color: rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(255, 100, 255, 0.5);
+}
 .hitbox-game {
-    top: 23%;
-    right: 3.5%; 
-    width: 13%;
-    height: 10%;
+    top: 23.3%;
+    right: 1.5%; 
+    width: 15.5%;
+    height: 11.5%;
     transform: translateY(-50%);
+}
+.hitbox-game:hover {
+    box-shadow: 0 0 25px rgba(200, 50, 255, 0.8), 
+                0 0 40px rgba(200, 50, 255, 0.6);
+                
+    background-color: rgba(200, 50, 255, 0.1);
+    border: 1px solid rgba(220, 100, 255, 0.5);
 }
 
 /* --- CRÉDITS --- */
