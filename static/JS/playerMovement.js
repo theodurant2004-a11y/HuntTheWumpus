@@ -1,37 +1,20 @@
-function moveUp() {
-    console.log("Le joueur monte !");
-}
-
-function moveDown() {
-    console.log("Le joueur descend !");
-}
-
-function moveLeft() {
-    console.log("Le joueur va à gauche !");
-}
-
-function moveRight() {
-    console.log("Le joueur va à droite !");
-}
-
 document.addEventListener('keydown', (event) => {
-    
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
         event.preventDefault(); 
     }
 
     switch(event.key) {
         case "ArrowUp":
-            moveUp();
+            window.location.href = "/move/up";
             break;
         case "ArrowDown":
-            moveDown();
+            window.location.href = "/move/down";
             break;
         case "ArrowLeft":
-            moveLeft();
+            window.location.href = "/move/left";
             break;
         case "ArrowRight":
-            moveRight();
+            window.location.href = "/move/right";
             break;
     }
 });
