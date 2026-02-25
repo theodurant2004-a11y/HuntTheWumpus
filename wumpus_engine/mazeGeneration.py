@@ -227,6 +227,25 @@ def generateMaze(difficulty):
 
     return maze
 
+def generateBats(difficulty):
+    bats = [[0 for _ in range(8)] for _ in range(6)]
+    all_coord = []
+    for y in range(len(bats)):
+        for x in range(len(bats[0])):
+            all_coord.append((x,y))
+
+    if difficulty == 1:
+        nb_bats = 1
+    elif difficulty == 2 or difficulty == 3:
+        nb_bats = 2
+
+    chosen_spots = sample(all_coord, nb_bats)
+
+    for (x, y) in chosen_spots:
+        bats[y][x] = 1
+    
+    return bats
+
 def move(maze, vision_maze, direction, coming_from_hist):
     for y in range(len(vision_maze)):
         for x in range(len(vision_maze[0])):
@@ -279,10 +298,6 @@ def move(maze, vision_maze, direction, coming_from_hist):
 
                 elif case_type == WUMPUS or case_type == SLIMEPIT:
                     authorised_mov = False
-                    for row in range(len(vision_maze)):
-                        for col in range(len(vision_maze[0])):
-                            if vision_maze[row][col] != 2:
-                                vision_maze[row][col] = 1
                 
                 if authorised_mov:
                     coming_from_hist.append(coming_from)
@@ -290,6 +305,11 @@ def move(maze, vision_maze, direction, coming_from_hist):
                         coming_from_hist.pop(0)
                     vision_maze[y][x] = 1
                     vision_maze[new_y][new_x] = 2
+                    if maze[new_y][new_x] == WUMPUS or maze[new_y][new_x] == SLIMEPIT:
+                        for row in range(len(vision_maze)):
+                            for col in range(len(vision_maze[0])):
+                                if vision_maze[row][col] != 2:
+                                    vision_maze[row][col] = 1
                 
                 return vision_maze
     return vision_maze

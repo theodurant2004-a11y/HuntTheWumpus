@@ -15,13 +15,18 @@
                 <tr class="maze_tr">
                     {% for unit in row %}
                         {% set x = loop.index0 %}
-                        {% if vision_maze[y][x] == 1 %}
-                            <td class=case_type_{{unit}}></td>
-                        {% elif vision_maze[y][x] == 2 %}
-                            <td class="case_type_{{unit}} player_visible"></td>
+                        {% if vision_maze[y][x] == 1 or vision_maze[y][x] == 2 %}
+                            <td class="case_type_{{ unit }}">
+                            {% if bats[y][x] == 1 %}
+                                <div class="maze_bat"></div>
+                            {% endif %}
+                            {% if vision_maze[y][x] == 2 %}
+                                <div class="maze_player"></div>
+                            {% endif %}
+                            </td>
                         {% else %}
                             <td></td>
-                        {% endif %}
+                        {% endif %} 
                     {% endfor %}
                 </tr>
             {% endfor %}
