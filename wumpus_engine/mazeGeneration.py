@@ -279,6 +279,10 @@ def move(maze, vision_maze, direction, coming_from_hist):
 
                 elif case_type == WUMPUS or case_type == SLIMEPIT:
                     authorised_mov = False
+                    for row in range(len(vision_maze)):
+                        for col in range(len(vision_maze[0])):
+                            if vision_maze[row][col] != 2:
+                                vision_maze[row][col] = 1
                 
                 if authorised_mov:
                     coming_from_hist.append(coming_from)
@@ -288,3 +292,4 @@ def move(maze, vision_maze, direction, coming_from_hist):
                     vision_maze[new_y][new_x] = 2
                 
                 return vision_maze
+    return vision_maze
