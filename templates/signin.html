@@ -3,7 +3,7 @@
 
 {% block title %}Inscription{% endblock %}
 {% block subtitle %}Inscription{% endblock %}
-{% block form_action %}/signin{% endblock %}
+{% block form_action %}{{ url_for('auth.signin') }}{% endblock %}
 
 {% block extra_fields %}
     <div class="character-selection">

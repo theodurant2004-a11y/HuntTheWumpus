@@ -5,7 +5,7 @@
 
 {% block subtitle %}Connexion{% endblock %}
 
-{% block form_action %}/login{% endblock %}
+{% block form_action %}{{ url_for('auth.login') }}{% endblock %}
 
 {% block button_image %}
     <img src="{{ url_for('static', filename='ASSETS/IMAGES/usable/LoginBtn.png') }}" alt="Bouton Jouer/Connexion">

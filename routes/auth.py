@@ -1,12 +1,27 @@
-from flask import Blueprint, render_template, current_app, request, redirect, url_for, flash
+from flask import Blueprint, render_template, current_app, request, redirect, url_for, flash, session
 import os
 import psycopg
 from psycopg.rows import dict_row # dictionnaires 
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv #fichier .env
 import re #pour les regex
+from functools import wraps #Décorateur
 
 auth_bp = Blueprint('auth', __name__)
+
+# ================================
+#       SÉCURITÉ (Décorateur)
+# ================================
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Si pas de session
+        if 'joueur_id' not in session:
+            flash("Accès refusé. Veuillez vous connecter pour jouer !", "error")
+            return redirect(url_for('auth.login'))
+        # Si session
+        return f(*args, **kwargs)
+    return decorated_function
 
 #====================
 #   CONNEXION DB
@@ -40,7 +55,7 @@ def login():
             
             # Vérification mot de passe 
             if user and check_password_hash(user['mot_de_passe'], password): 
-                return redirect(url_for('game.gameScreen'))
+                return redirect(url_for('game.podiumScreen'))
             else:
                 flash("Informations invalides.")
                 return redirect(url_for('auth.login'))            
