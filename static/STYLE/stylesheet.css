@@ -387,6 +387,7 @@ body {
     background-size: 100%, 50%;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
 }
 
 .case_type_0 {
@@ -419,4 +420,26 @@ body {
 
 .case_type_7 {
     background-image: url("../ASSETS/IMAGES/mazeImages/Case.png"), url("../ASSETS/IMAGES/mazeImages/Wumpus.png");
+}
+
+.maze_bat, .maze_player {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.maze_player {
+    background-image: url("../ASSETS/IMAGES/mazeImages/Char.png");
+    background-size: 20%; 
+    z-index: 10; 
+}
+
+.maze_bat {
+    background-image: url("../ASSETS/IMAGES/mazeImages/brownBat.png"); 
+    background-size: 70%; 
+    z-index: 5; 
 }
