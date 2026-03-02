@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block signin_active %}active{% endblock %}
+
+{% block title %}Inscription{% endblock %}
+{% block subtitle %}Inscription{% endblock %}
+{% block form_action %}{{ url_for('auth.signin') }}{% endblock %}
+
+{% block extra_fields %}
+    <div class="character-selection">
+        <span class="arrow-btn" id="prev-btn">&#8592;</span>
+        
+        <div class="avatars-carousel" id="carousel">
+            {% for avatar in avatars %}
+                <label class="char-option">
+                    <input type="radio" name="avatar" value="{{ avatar }}" required>
+                    <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ avatar) }}" alt="Avatar">
+                </label>
+            {% endfor %}
+        </div>
+
+        <span class="arrow-btn" id="next-btn">&#8594;</span>
+    </div>
+
+    <script src="{{ url_for('static', filename='JAVASCRIPT/carousel.js') }}"></script>
+{% endblock %}
+
+{% block button_image %}
+    <img src="{{ url_for('static', filename='ASSETS/IMAGES/usable/playBtn.png') }}" alt="Bouton Inscription">
+{% endblock %}

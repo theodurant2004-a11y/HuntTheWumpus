@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunt the Wumpus - {% block title %}{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/test.css') }}">
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <h1>Hunt the wumpus</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div id="error-popup" class="retro-popup">
+            <div class="popup-content">
+                <p>{{ messages[0] }}</p>
+                <button onclick="document.getElementById('error-popup').style.display='none'"
+                    class="close-btn">Fermer</button>
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="main-container">
+
+            <h2>{% block subtitle %}{% endblock %}</h2>
+            <div class="auth-toggle">
+                <a href="/" class="toggle-link {% block login_active %}{% endblock %}">Login</a>
+                <span class="separator">|</span>
+                <a href="/signin" class="toggle-link {% block signin_active %}{% endblock %}">Sign-in</a>
+            </div>
+
+            <form action="{% block form_action %}{% endblock %}" method="POST">
+                <div class="form-group">
+                    <label for="pseudo">Pseudo :</label>
+                    <input type="text" id="pseudo" name="pseudo" placeholder="WumpusHunter" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password :</label>
+                    <input type="password" id="password" name="password" placeholder="*************" required>
+                </div>
+
+                {% block extra_fields %}{% endblock %}
+
+                <button type="submit" class="pixel-button">
+                    {% block button_image %}{% endblock %}
+                </button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

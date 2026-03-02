@@ -1,38 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hunt the Wumpus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
-</head>
+{% extends "base.html" %}
+{% block login_active %}active{% endblock %}
 
-<body>
-    <div id="loginScreen">
-        <h1 class="game-title">Hunt the wumpus</h1>
-        <form action=""class="login-form">
-            <div class="input-group">
-                <label for="login">Login :</label>
-                <input type="text" id="login" name="login" placeholder="monmail@gmail.com">
-            </div>
-            <div class="input-group">
-                <label for="password">Password :</label>
-                <input type="password" id="password" name="password" placeholder="••••••••••••">
-            </div>
-            <a class="play-button" href="{{ url_for('podiumScreen') }}">
-                <img src="{{ url_for('static', filename='ASSETS/IMAGES/usable/LoginBtn.png') }}" alt="PLAY">
-            </a>
-        </form>
+{% block title %}Connexion{% endblock %}
 
-        <div class="credits-postit">
-            Théo Durant
-            <br>
-            Augustin
-            <br>
-            Déllicieux
-        </div>
-    </div>
-</body>
+{% block subtitle %}Connexion{% endblock %}
 
-</html>
+{% block form_action %}{{ url_for('auth.login') }}{% endblock %}
+
+{% block button_image %}
+    <img src="{{ url_for('static', filename='ASSETS/IMAGES/usable/LoginBtn.png') }}" alt="Bouton Jouer/Connexion">
+{% endblock %}

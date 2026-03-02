@@ -1,0 +1,419 @@
+/* 
+========================
+    Police d'écriture
+========================
+*/
+@font-face {
+    font-family: 'Doto-regular';
+    src: url('../ASSETS/FONT/Doto/static/Doto-Regular.ttf') format('truetype');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Doto-Bold';
+    src: url('../ASSETS/FONT/Doto/static/Doto-Bold.ttf') format('truetype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Doto-SemiBold';
+    src: url('../ASSETS/FONT/Doto/static/Doto-SemiBold.ttf') format('truetype');
+    font-weight: 600; /* Bold */
+}
+@font-face {
+    font-family: 'Tourney-LightItalic';
+    src: url('../ASSETS/FONT/Tourney/static/Tourney-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600; /* Bold */
+}
+/* 
+========================
+    Reset de base
+========================
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url('../ASSETS/IMAGES/usable/cursor.png') 4 4, auto;
+}
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+    
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;
+}
+
+/* 
+========================
+    Effet arcade
+========================
+*/
+body::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 80;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+body::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: radial-gradient(circle, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 11;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+}
+
+/* 
+========================
+    page connexion
+          et
+    page inscription
+========================
+*/
+/* Body page*/
+.auth-wrapper {
+    background-image: url('../ASSETS/IMAGES/background/bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    color: #fdfd96;
+}
+/* Titre du jeu */
+.auth-wrapper h1{
+    font-family: 'Doto-SemiBold', sans-serif;
+    font-size: 350%;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 2%;
+    text-shadow: 4px 4px 0px #000, -2px -2px 0px #000;
+    letter-spacing: 4px;
+    z-index: 5;
+}
+/* conteneur central*/
+.auth-wrapper .main-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 0.2vw solid rgba(240, 241, 78, 0.2);
+    backdrop-filter: blur(4px);
+    width: 40%; 
+    height: auto; 
+    padding: 3%;
+    padding-bottom: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+/* Textes à l'intérieur du wrapper */
+.auth-wrapper h2 { 
+    font-size: 250%; 
+    color: #ff5f85; 
+    margin-bottom: 8%; 
+    font-family: 'Doto-regular', sans-serif; 
+}
+/* Formulaire et inputs */
+.auth-wrapper .form-group { 
+    margin-bottom: 5%; 
+    text-align: left; 
+    width: 100%;
+}
+.auth-wrapper label { 
+    display: block; 
+    margin-bottom: 2%; 
+    font-size: 120%; 
+    font-family: 'Doto-regular', sans-serif;
+}
+
+.auth-wrapper input[type="text"], 
+.auth-wrapper input[type="password"] {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgba(200, 50, 80, 0.4);
+    border: 3px dashed #a02040;
+    outline: none;
+    color: #fff;
+    width: 100%;
+    padding: 3%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.auth-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+.auth-wrapper input:focus {
+    border-color: #f0f14e;
+    box-shadow: 0 0 15px rgba(240, 241, 78, 0.5);
+}
+
+/* Boutons pixel art */
+.auth-wrapper .pixel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 25%; 
+    margin-top: 5%;
+    padding: 0;
+    transition: transform 0.1s ease-in-out;
+    image-rendering: pixelated;
+}
+.auth-wrapper .pixel-button:hover {
+    transform: scale(1.1); 
+}
+.auth-wrapper .pixel-button img { 
+    width: 100%; 
+    height: auto; 
+    display: block;
+}
+/* 
+========================
+     MENU NAVIGATION 
+========================
+*/
+.auth-wrapper .auth-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    margin-bottom: 5%;
+}
+.auth-wrapper .toggle-link {
+    text-decoration: none;
+    color: #ffb6c1;
+    font-size: 120%;
+    padding: 1% 2%;
+    transition: all 0.2s ease-in-out;
+}
+.auth-wrapper .separator {
+    color: #555; 
+    font-size: 120%;
+}
+.auth-wrapper .toggle-link:hover {
+    color: #fdfd96; /* Devient jaune */
+    transform: scale(1.1);
+}
+.auth-wrapper .toggle-link.active {
+    color: #fdfd96;
+    border-bottom: 0.2vw solid #fdfd96;
+    text-shadow: 0 0 0.5vw rgba(253, 253, 150, 0.5); 
+}
+/* 
+============================
+    CARROUSEL AVATARS
+============================
+*/
+.auth-wrapper .character-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: -5%;
+    height: 12vh;
+}
+.auth-wrapper .avatars-carousel {
+    position: relative;
+    width: 60%; 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Base de l'avatar */
+.auth-wrapper .char-option {
+    position: absolute;
+    width: 40%;
+    max-width: 80px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    display: none;
+}
+.auth-wrapper .char-option input[type="radio"] {
+    display: none;
+}
+.auth-wrapper .char-option img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated; 
+}
+
+/* Avatar Gauche */
+.auth-wrapper .char-option.prev {
+    display: block;
+    left: 15%; 
+    transform: translateY(-50%) scale(0.8);
+    top: 50%;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* Avatar Droite */
+.auth-wrapper .char-option.next {
+    display: block;
+    right: 15%;
+    transform: translateY(-50%) scale(0.8);
+    top: 50%;
+    opacity: 0.5;
+    z-index: 1;
+}
+/* Avatar du Centre */
+.auth-wrapper .char-option.active {
+    display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.3); 
+    opacity: 1;
+    z-index: 5;
+    filter: drop-shadow(0 0 5px rgba(253, 253, 150, 0.8));
+}
+/* --- FLÈCHES --- */
+.auth-wrapper .arrow-btn {
+    cursor: pointer;
+    color: #fdfd96;
+    font-size: 200%;
+    padding: 0 5%;
+    user-select: none;
+}
+.auth-wrapper .arrow-btn:hover {
+    transform: scale(1.2);
+}
+/* 
+====================
+   POP-UP D'ERREUR
+====================
+*/
+.auth-wrapper .retro-popup {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ed3833;
+    border: 0.3vw solid #fdfd96; 
+    padding: 2%;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 0 1vw rgba(253, 253, 150, 0.8);
+    width: 60%;
+    max-width: 500px;
+    animation: slideDown 0.3s ease-out;
+    font-family: 'Tourney-LightItalic';
+}
+
+.auth-wrapper .retro-popup p {
+    color: white;
+    font-size: 110%;
+    margin-bottom: 5%;
+    line-height: 1.5;
+}
+
+.auth-wrapper .close-btn {
+    background-color: black;
+    color: #fdfd96;
+    border: 0.1vw solid #fdfd96;
+    padding: 2% 5%;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 100%;
+    transition: transform 0.1s;
+}
+
+.auth-wrapper .close-btn:hover {
+    transform: scale(1.1);
+    background-color: #222;
+}
+
+@keyframes slideDown {
+    from { top: -10%; opacity: 0; }
+    to { top: 50%; opacity: 1; }
+}
+/* =========================================
+   ANIMATION DU CLASSEMENT (PodiumScreen)
+   ========================================= */
+.leaderboard-box {
+    overflow: hidden; /* C'est ce qui masque les "autres joueurs" avant qu'ils ne montent */
+}
+
+.scrolling-credits {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* L'animation : Elle attend 3 secondes avant de démarrer, et dure 10 secondes */
+    animation: scrollUp 10s linear 3s forwards; 
+}
+
+.player .score {
+    font-family: 'Doto-regular', sans-serif;
+    color: #f0f14e;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.other-players {
+    margin-top: 15%; 
+    width: 100%;
+    color: white;
+    font-family: 'Doto-regular', sans-serif;
+    text-align: center;
+    padding-bottom: 20%;
+}
+
+.other-players h3 {
+    color: #ff5f85;
+    margin-bottom: 5%;
+}
+
+.other-player-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.tiny-avatar {
+    width: 40px;
+    image-rendering: pixelated;
+}
+
+.other-score {
+    color: #f0f14e;
+}
+
+/* L'animation qui fait monter le bloc */
+@keyframes scrollUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-70%); } /* Ajuste ce -70% si ta liste de joueurs est très longue */
+}
+
+/* 
+==================
+    Responsive
+==================
+*/
+
+@media (max-width: 60vw) {
+    .auth-wrapper .main-container {
+        width: 80%;
+        padding: 8%;
+    }
+}
