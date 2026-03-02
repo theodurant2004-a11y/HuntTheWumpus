@@ -104,28 +104,38 @@ body {
     width: 100%;
     max-width: 450px;
     z-index: 5;
-    
     background-color: rgba(0, 0, 0, 0.6); 
-    padding: 40px 40px 10px 40px;
+    padding: 1% 5% 1% 5%;
     border-radius: 10px;
     border: 1px solid rgba(240, 241, 78, 0.3);
     backdrop-filter: blur(4px);
 }
+.login-form h2{
+    color: 	#ff5f85; 
+    text-align: center; 
+    font-family: 'Doto-regular', sans-serif; 
+}
+.login-form p{
+    text-align: center; 
+    margin: 5%
+}
+.sign-in{
+    color: #f0f14e; 
+    margin-top: -50%;
+    font-family: 'Tourney-LightItalic';
+}
 
+/* inputs */
 .input-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .input-group label {
     font-family: 'Doto-regular', sans-serif;
     font-size: 1.7rem;
     text-align: left;
 }
-
-
-/* inputs */
 .input-group input {
     font-family: 'Courier New', Courier, monospace;
     background-color: rgba(200, 50, 80, 0.4);
@@ -135,7 +145,6 @@ body {
     font-size: 1.1rem;
     outline: none;
 }
-
 .input-group input:focus {
     border-color: #f0f14e;
     box-shadow: 0 0 15px rgba(240, 241, 78, 0.5);
@@ -146,7 +155,8 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 5%;
+    margin-bottom: -10%;
     align-self: center;
     transition: transform 0.1s ease-in-out;
     image-rendering: pixelated;
@@ -161,50 +171,83 @@ body {
 
 /* --- SCORE SCREEN --- */
 #scoreScreen {
-    background-image: url('../ASSETS/IMAGES/background/bg_clear.png');
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    padding-top: 120px; 
-    align-items: center;
+    background-color: #000;
+    height: 100vh;
+    width: 100vw;
     position: relative;
-}
-.leaderboard-box {
-    background-color: rgba(0, 0, 0, 0.8); 
-    padding: 30px 50px 0 50px;
-    border-radius: 10px;
-    border: 1px solid rgba(240, 241, 78, 0.3);
-    backdrop-filter: blur(4px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 5;
     overflow: hidden;
-    height: 100%;
-    width: 90%; 
-    max-width: 1200px; 
 }
 
-/* podium */
+/* --- LE BRIDGE --- */
+.background-bridge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    background-image: url('../ASSETS/IMAGES/background/bg_clear.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 177.78vh; 
+    max-height: 56.25vw;
+    z-index: 1;
+}
+
+/* --- LE TITRE --- */
+.game-title {
+    position: absolute;
+    top: 12%;      
+    left: 0;
+    width: 100%;    
+    text-align: center;
+    margin: 0;
+    font-family: 'Doto-SemiBold', sans-serif;
+    color: #f0f14e;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px #000;
+    font-size: 6vh; 
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* --- LEADERBOARD --- */
+.leaderboard-box {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%; 
+    height: 55%;   
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding-top: 10%; 
+    border-radius: 10px;
+    border: 1px solid rgba(240, 241, 78, 0.3);
+    backdrop-filter: blur(4px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* --- PODIUM --- */
 .podium-wrapper {
     position: relative;
-    margin-top: auto;
     width: 80%; 
-    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
+
 .podium-img {
     width: 100%;
     display: block;
-    margin-bottom: -5px; 
+    margin-bottom: -1%; 
 }
 
-/* Positionnement joueurs */
+/* --- JOUEURS --- */
 .player {
     position: absolute;
     display: flex;
@@ -214,48 +257,77 @@ body {
 }
 .player .name {
     font-family: 'Tourney-LightItalic', sans-serif;
-    font-size: 1rem;
-    color: 	#6ded8a; 
-    margin-bottom: 1px;
+    font-size: 1.2vw; 
+    color: #6ded8a; 
+    margin-bottom: 2%;
+    white-space: nowrap; 
 }
 .player .avatar {
     width: 100%;
     height: auto;
     image-rendering: pixelated;
 }
-
-/* Milieu - 1 */
+/* Gagnant (Milieu) */
 .p1 { 
     left: 51%;     
-    bottom: 92%;
+    bottom: 90%;
     z-index: 10;
-    width: 120px;
+    width: 25%;
 }
 
-/* Gauche -  2 */
+/* Deuxième (Gauche) */
 .p2 { 
-    left: 25%;     
-    bottom: 70%;
-    width: 95px;
+    left: 26%;     
+    bottom: 68%;
+    width: 20%; 
 }
 
-/*  Droite -  3 */
+/* Troisième (Droite) */
 .p3 { 
     left: 75%;     
-    bottom: 65%;
-    width: 80px;   
+    bottom: 64%;
+    width: 15%; 
 }
 
-/* Hitboxes pour cliquer sur le décor */
+/* --- HITBOXES --- */
 .hitbox {
     position: absolute;
     z-index: 100;
-    background: rgba(255,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+    /* background: rgba(255, 0, 0, 0.5); */
 }
-.hitbox-option { top: 5%; left: 1%; width: 140px; height: 400px; }
-.hitbox-game { top: 8%; right: 1%; width: 200px; height: 150px; }
+.hitbox-option {
+    top: 24.3%; 
+    left: 14.8%;
+    width: 5%; 
+    height: 38%;
+    transform: translate(-50%, -50%);
+}
+.hitbox-option:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.8), 
+                0 0 40px rgba(255, 0, 255, 0.6);
 
-/* --- Post-it Crédits --- */
+    background-color: rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(255, 100, 255, 0.5);
+}
+.hitbox-game {
+    top: 23.3%;
+    right: 1.5%; 
+    width: 15.5%;
+    height: 11.5%;
+    transform: translateY(-50%);
+}
+.hitbox-game:hover {
+    box-shadow: 0 0 25px rgba(200, 50, 255, 0.8), 
+                0 0 40px rgba(200, 50, 255, 0.6);
+                
+    background-color: rgba(200, 50, 255, 0.1);
+    border: 1px solid rgba(220, 100, 255, 0.5);
+}
+
+/* --- CRÉDITS --- */
 .credits-postit {
     position: absolute;
     bottom: 30px;
@@ -268,9 +340,8 @@ body {
     font-size: 0.9rem;
     transform: rotate(-5deg);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    z-index: 15;
+    z-index: 200; 
 }
-
 .credits-postit::before {
     content: '';
     position: absolute;
@@ -280,12 +351,6 @@ body {
     height: 20px;
     background-color: rgba(255, 255, 255, 0.5);
     transform: rotate(5deg);
-}
-
-@keyframes flicker {
-    0% { opacity: 0.98; }
-    50% { opacity: 1; }
-    100% { opacity: 0.99; }
 }
 
 /* --- PAGE DU JEU --- */
