@@ -45,16 +45,19 @@ def get_db_connection():
 @auth_bp.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('login')
+        pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         con, cur = get_db_connection()
 
         try:
-            cur.execute("SELECT * FROM joueurs WHERE email = %s", (email,))
+            cur.execute("SELECT * FROM users WHERE pseudo = %s", (pseudo,))
             user = cur.fetchone()
             
             # Vérification mot de passe 
             if user and check_password_hash(user['mot_de_passe'], password): 
+                session['joueur_id'] = user['id']
+                session['joueur_pseudo'] = user['pseudo']
+                session['joueur_avatar'] = user['avatar']
                 return redirect(url_for('game.podiumScreen'))
             else:
                 flash("Informations invalides.")
@@ -71,14 +74,14 @@ def login():
 @auth_bp.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
-        email = request.form.get('login')
+        pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         avatar = request.form.get('avatar')
-        email_regex = r'^[^@]+@[^@]+\.[^@]+$'
+        pseudo_regex = r'^[a-zA-Z0-9_]{3,15}$'
         password_regex = r'^(?=.*\d).{8,16}$'
 
-        if not re.match(email_regex, email):
-            flash("Format d'email invalide.")
+        if not re.match(pseudo_regex, pseudo):
+            flash("Le pseudo doit faire entre 3 et 15 caractères (sans espaces et caractères spéciaux).")
             return redirect(url_for('auth.signin'))
         if not re.match(password_regex, password):
             flash("Le mot de passe doit faire entre 8 et 16 caractères et contenir au moins un chiffre.")
@@ -90,17 +93,27 @@ def signin():
         try:
             # Insertion données
             cur.execute(
-                "INSERT INTO joueurs (email, mot_de_passe, avatar) VALUES (%s, %s, %s)", 
-                (email, hashed_password, avatar)
+                "INSERT INTO users (pseudo, mot_de_passe, avatar) VALUES (%s, %s, %s) RETURNING id", 
+                (pseudo, hashed_password, avatar)
             )
+            #reprendre l'id du nouveau users
+            new_user = cur.fetchone()
+            user_id = new_user['id']
             # commit "prof=> toujours a la connection gnagnagna"
             con.commit() 
-            return redirect(url_for('auth.login'))
+
+            session['joueur_id'] = user_id
+            session['joueur_pseudo'] = pseudo  
+            session['joueur_avatar'] = avatar
+
+            flash("Compte créé avec succès ! Bienvenue.")
+
+            return redirect(url_for('game.podiumScreen'))
             
         except psycopg.IntegrityError:
             # souci : rollback 
             con.rollback() 
-            flash("L'inscription a échoué : cet email est déjà utilisé.")
+            flash("L'inscription a échoué : cet pseudo est déjà utilisé.")
             return redirect(url_for('auth.signin'))
             
         finally:

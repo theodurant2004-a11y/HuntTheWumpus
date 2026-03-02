@@ -5364,10 +5364,10 @@ false posixrules
       <StoredType>integer|0s</StoredType>
       <OwnerName>py15</OwnerName>
     </sequence>
-    <table id="380" parent="378" name="joueurs">
+    <table id="380" parent="378" name="users">
       <DetailsLevel>2</DetailsLevel>
       <ObjectId>43706</ObjectId>
-      <StateNumber>814653</StateNumber>
+      <StateNumber>814661</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>py15</OwnerName>
     </table>
@@ -5380,10 +5380,10 @@ false posixrules
       <SequenceId>43705</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="382" parent="380" name="email">
+    <column id="382" parent="380" name="pseudo">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>814653</StateNumber>
+      <StateNumber>814663</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
@@ -5401,18 +5401,23 @@ false posixrules
       <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="385" parent="380" name="joueurs_pkey">
+    <column id="385" parent="380" name="nbvictory">
+      <DefaultExpression>0</DefaultExpression>
+      <Position>5</Position>
+      <StateNumber>814661</StateNumber>
+      <StoredType>integer|0s</StoredType>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="386" parent="380" name="joueurs_pkey">
       <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
       <ObjectId>43712</ObjectId>
       <Primary>1</Primary>
       <StateNumber>814653</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="386" parent="380" name="joueurs_email_key">
-      <ColNames>email</ColNames>
-      <NameSurrogate>1</NameSurrogate>
+    <index id="387" parent="380" name="joueurs_email_key">
+      <ColNames>pseudo</ColNames>
       <ObjectId>43714</ObjectId>
       <StateNumber>814653</StateNumber>
       <Unique>1</Unique>
@@ -5421,15 +5426,13 @@ false posixrules
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="387" parent="380" name="joueurs_pkey">
-      <NameSurrogate>1</NameSurrogate>
+    <key id="388" parent="380" name="joueurs_pkey">
       <ObjectId>43713</ObjectId>
       <Primary>1</Primary>
       <StateNumber>814653</StateNumber>
       <UnderlyingIndexId>43712</UnderlyingIndexId>
     </key>
-    <key id="388" parent="380" name="joueurs_email_key">
-      <NameSurrogate>1</NameSurrogate>
+    <key id="389" parent="380" name="joueurs_email_key">
       <ObjectId>43715</ObjectId>
       <StateNumber>814653</StateNumber>
       <UnderlyingIndexId>43714</UnderlyingIndexId>

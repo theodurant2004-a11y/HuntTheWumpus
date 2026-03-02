@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3d3b680-0793-4bf8-b5b4-9ae4cd459d34" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/61b4d6de-f930-4875-8ff3-d69ffc01dcf7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/61b4d6de-f930-4875-8ff3-d69ffc01dcf7.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/STYLE/test.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/STYLE/test.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +92,7 @@
       <workItem from="1771844790270" duration="2658000" />
       <workItem from="1772026197330" duration="1219000" />
       <workItem from="1772027478227" duration="1350000" />
-      <workItem from="1772048630724" duration="4769000" />
+      <workItem from="1772048630724" duration="12897000" />
     </task>
     <servers />
   </component>

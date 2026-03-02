@@ -14,15 +14,15 @@
     <div class="auth-wrapper">
         <h1>Hunt the wumpus</h1>
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div id="error-popup" class="retro-popup">
-                <div class="popup-content">
-                    <p>{{ messages[0] }}</p>
-                    <button onclick="document.getElementById('error-popup').style.display='none'"
-                        class="close-btn">Fermer</button>
-                </div>
+        {% if messages %}
+        <div id="error-popup" class="retro-popup">
+            <div class="popup-content">
+                <p>{{ messages[0] }}</p>
+                <button onclick="document.getElementById('error-popup').style.display='none'"
+                    class="close-btn">Fermer</button>
             </div>
-            {% endif %}
+        </div>
+        {% endif %}
         {% endwith %}
         <div class="main-container">
 
@@ -35,8 +35,8 @@
 
             <form action="{% block form_action %}{% endblock %}" method="POST">
                 <div class="form-group">
-                    <label for="login">Login :</label>
-                    <input type="text" id="login" name="login" placeholder="monmail@gmail.com" required>
+                    <label for="pseudo">Pseudo :</label>
+                    <input type="text" id="pseudo" name="pseudo" placeholder="WumpusHunter" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password :</label>

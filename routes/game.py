@@ -1,13 +1,22 @@
 from flask import Blueprint, render_template, session
 from wumpus_engine import mazeGeneration
-from routes.auth import login_required
+from routes.auth import login_required, get_db_connection
 
 game_bp = Blueprint('game', __name__)
 
 @game_bp.route('/podiumScreen')
 @login_required#c'est le sécuriter du décorateur - Plus besoin de faire le "if session..."
 def podiumScreen():
-    return render_template('podiumScreen.html')
+    con, cur = get_db_connection()
+    try:
+        # On sélectionne le pseudo au lieu de l'email
+        cur.execute("SELECT pseudo, avatar, nbVictory FROM users ORDER BY nbVictory DESC")
+        players = cur.fetchall()
+    finally:
+        cur.close()
+        con.close()
+
+    return render_template('podiumScreen.html', players=players)
 
 @game_bp.route('/gameScreen')
 @login_required

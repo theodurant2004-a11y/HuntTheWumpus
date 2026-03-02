@@ -284,7 +284,6 @@ body::after {
     z-index: 5;
     filter: drop-shadow(0 0 5px rgba(253, 253, 150, 0.8));
 }
-
 /* --- FLÈCHES --- */
 .auth-wrapper .arrow-btn {
     cursor: pointer;
@@ -344,6 +343,66 @@ body::after {
 @keyframes slideDown {
     from { top: -10%; opacity: 0; }
     to { top: 50%; opacity: 1; }
+}
+/* =========================================
+   ANIMATION DU CLASSEMENT (PodiumScreen)
+   ========================================= */
+.leaderboard-box {
+    overflow: hidden; /* C'est ce qui masque les "autres joueurs" avant qu'ils ne montent */
+}
+
+.scrolling-credits {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* L'animation : Elle attend 3 secondes avant de démarrer, et dure 10 secondes */
+    animation: scrollUp 10s linear 3s forwards; 
+}
+
+.player .score {
+    font-family: 'Doto-regular', sans-serif;
+    color: #f0f14e;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.other-players {
+    margin-top: 15%; 
+    width: 100%;
+    color: white;
+    font-family: 'Doto-regular', sans-serif;
+    text-align: center;
+    padding-bottom: 20%;
+}
+
+.other-players h3 {
+    color: #ff5f85;
+    margin-bottom: 5%;
+}
+
+.other-player-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.tiny-avatar {
+    width: 40px;
+    image-rendering: pixelated;
+}
+
+.other-score {
+    color: #f0f14e;
+}
+
+/* L'animation qui fait monter le bloc */
+@keyframes scrollUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-70%); } /* Ajuste ce -70% si ta liste de joueurs est très longue */
 }
 
 /* 
