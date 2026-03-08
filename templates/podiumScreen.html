@@ -1,48 +1,70 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hunt the Wumpus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
-</head>
+{% block title %}Podium{% endblock %}
 
-<body>
-    <div id="scoreScreen">
+{% block body_content %}
+<div id="scoreScreen">
 
-        <div class="background-bridge">
+    <div class="background-bridge">
 
-            <a href="#" class="hitbox hitbox-option"></a>
-            <a href="{{ url_for('game.gameScreen') }}" class="hitbox hitbox-game"></a>
+        <a href="#" class="hitbox hitbox-option"></a>
+        <a href="{{ url_for('game.gameScreen') }}" class="hitbox hitbox-game"></a>
 
-            <h1 class="game-title">Hunt the wumpus</h1>
+        <h1 class="game-title">Hunt the wumpus</h1>
 
-            <div class="leaderboard-box">
+        <div class="leaderboard-box">
+            <div class="scrolling-credits">
+
                 <div class="podium-wrapper">
                     <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/podium.png') }}"
                         class="podium-img" alt="Podium">
 
+                    {% if players|length > 1 %}
                     <div class="player p2">
-                        <span class="name">Profil 1</span>
-                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/2.png') }}" class="avatar">
+                        <span class="name">{{ players[1].pseudo }}</span>
+                        <span class="score">{{ players[1].nbvictory }} Wins</span>
+                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ players[1].avatar) }}"
+                            class="avatar">
                     </div>
+                    {% endif %}
 
+                    {% if players|length > 0 %}
                     <div class="player p1">
-                        <span class="name">Profil 2</span>
-                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/1.png') }}" class="avatar">
+                        <span class="name">{{ players[0].pseudo }}</span>
+                        <span class="score">{{ players[0].nbvictory }} Wins</span>
+                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ players[0].avatar) }}"
+                            class="avatar">
                     </div>
+                    {% endif %}
 
+                    {% if players|length > 2 %}
                     <div class="player p3">
-                        <span class="name">Profil 3</span>
-                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/leaderboard/3.png') }}" class="avatar">
+                        <span class="name">{{ players[2].pseudo }}</span>
+                         <span class="score">{{ players[2].nbvictory }} Wins</span>
+                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ players[2].avatar) }}"
+                            class="avatar">
                     </div>
+                    {% endif %}
                 </div>
+
+                {% if players|length > 3 %}
+                <div class="other-players">
+                    <h3>--- Autres Traqueurs ---</h3>
+                    {% for i in range(3, players|length) %}
+                    <div class="other-player-row">
+                        <span class="rank">#{{ i + 1 }}</span>
+                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ players[i].avatar) }}"
+                            class="tiny-avatar">
+                        <span class="other-name">{{ players[i].pseudo }}</span>
+                        <span class="other-score">{{ players[i].nbvictory }} Wins</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
             </div>
-
         </div>
-    </div>
-</body>
 
-</html>
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@ LEFT = 97
 RIGHT = 96
 
 # TMP
-DIFFICULTY = 2
+DIFFICULTY = 3
 
 maze = []
 vision_maze = []
@@ -23,8 +23,7 @@ game_bp = Blueprint('game', __name__)
 def podiumScreen():
     con, cur = get_db_connection()
     try:
-        # On sélectionne le pseudo au lieu de l'email
-        cur.execute("SELECT pseudo, avatar, nbVictory FROM users ORDER BY nbVictory DESC")
+        cur.execute("SELECT pseudo, avatar, nbvictory FROM users ORDER BY nbVictory DESC")
         players = cur.fetchall()
     finally:
         cur.close()
