@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunt the wumpus</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='JAVASCRIPT/playerMovement.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='JAVASCRIPT/maze.js')}}" defer></script>
 </head>
 <body>
     <div id="maze_screen">
@@ -17,10 +17,12 @@
                         {% set x = loop.index0 %}
                         {% if vision_maze[y][x] == 1 or vision_maze[y][x] == 2 %}
                             <td class="case_type_{{ unit }}">
-                            {% if bats[y][x] == 1 %}
+                            {% if bats[y][x] == 2 and vision_maze[y][x] == 2 %}
+                                <div class="triggered_bat"></div>
+                            {% elif bats[y][x] == 1 or bats[y][x] == 2 %}
                                 <div class="maze_bat"></div>
                             {% endif %}
-                            {% if vision_maze[y][x] == 2 %}
+                            {% if vision_maze[y][x] == 2 and not bats[y][x] == 2 %}
                                 <div class="maze_player"></div>
                             {% endif %}
                             </td>

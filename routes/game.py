@@ -8,7 +8,7 @@ LEFT = 97
 RIGHT = 96
 
 # TMP
-DIFFICULTY = 2
+DIFFICULTY = 1
 #############
 
 game_bp = Blueprint('game', __name__)
@@ -48,6 +48,26 @@ def gameScreen():
 
     return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
 
+@game_bp.route('/Maze')
+@login_required
+def showMaze():
+    if 'maze' not in session:
+        return redirect(url_for('game.gameScreen'))
+    
+    maze = session['maze']
+    vision_maze = session['vision_maze']
+    coming_from_hist = session['coming_from_hist']
+    bats_maze = session['bats_maze']
+
+    # TODO : faire en sorte que ça ne soit pas TOP mais une valeur qui dis qu'on ne se déplace pas vraiment
+    vision_maze = mazeGeneration.move(maze, vision_maze, 5, coming_from_hist, bats_maze)
+
+    # session['vision_maze'] = vision_maze
+    # session['coming_from_hist'] = coming_from_hist
+
+    session.modified = True
+    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
+
 @game_bp.route('/move/up')
 @login_required
 def moveUp():
@@ -59,7 +79,7 @@ def moveUp():
     coming_from_hist = session['coming_from_hist']
     bats_maze = session['bats_maze']
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, TOP, coming_from_hist)
+    vision_maze = mazeGeneration.move(maze, vision_maze, TOP, coming_from_hist, bats_maze)
 
     session['vision_maze'] = vision_maze
     session['coming_from_hist'] = coming_from_hist
@@ -78,7 +98,7 @@ def moveDown():
     coming_from_hist = session['coming_from_hist']
     bats_maze = session['bats_maze']
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, BOTTOM, coming_from_hist)
+    vision_maze = mazeGeneration.move(maze, vision_maze, BOTTOM, coming_from_hist, bats_maze)
 
     session['vision_maze'] = vision_maze
     session['coming_from_hist'] = coming_from_hist
@@ -97,7 +117,7 @@ def moveLeft():
     coming_from_hist = session['coming_from_hist']
     bats_maze = session['bats_maze']
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, LEFT, coming_from_hist)
+    vision_maze = mazeGeneration.move(maze, vision_maze, LEFT, coming_from_hist, bats_maze)
 
     session['vision_maze'] = vision_maze
     session['coming_from_hist'] = coming_from_hist
@@ -116,7 +136,7 @@ def moveRight():
     coming_from_hist = session['coming_from_hist']
     bats_maze = session['bats_maze']
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, RIGHT, coming_from_hist)
+    vision_maze = mazeGeneration.move(maze, vision_maze, RIGHT, coming_from_hist, bats_maze)
 
     session['vision_maze'] = vision_maze
     session['coming_from_hist'] = coming_from_hist

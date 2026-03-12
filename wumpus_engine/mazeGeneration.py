@@ -12,6 +12,7 @@ BLOODMARKED = 5
 SLIMENBLOOD = 6
 WUMPUS = 7
 
+JUSTLOAD = 100
 TOP = 99
 BOTTOM = 98
 LEFT = 97
@@ -125,7 +126,7 @@ def starting_point(maze):
     while not good_to_start:
         x = randint(0,7)
         y = randint(0,5)
-        if maze[y][x] == CAVERN:
+        if maze[y][x] == CAVERN or maze[y][x] == SLIMEMARKED or maze[y][x] == BLOODMARKED or maze[y][x] == SLIMENBLOOD:
             good_to_start = True
     return (x, y)
         
@@ -246,70 +247,97 @@ def generateBats(difficulty):
     
     return bats
 
-def move(maze, vision_maze, direction, coming_from_hist):
+def move(maze, vision_maze, direction, coming_from_hist, bats):
     for y in range(len(vision_maze)):
         for x in range(len(vision_maze[0])):
             if vision_maze[y][x] == 2:
                 case_type = maze[y][x]
 
-                if direction == TOP:
-                    new_y = (y - 1) % len(vision_maze)
-                    new_x = x
-                    coming_from = BOTTOM
-                elif direction == BOTTOM:
-                    new_y = (y + 1) % len(vision_maze)
-                    new_x = x
-                    coming_from = TOP
-                elif direction == LEFT:
-                    new_y = y
-                    new_x = (x - 1) % len(vision_maze[0])
-                    coming_from = RIGHT
-                elif direction == RIGHT:
-                    new_y = y
-                    new_x = (x + 1) % len(vision_maze[0])
-                    coming_from = LEFT
+                if not player_bats_interaction(maze, vision_maze, bats, x, y) and direction != 5:
 
-                if len(coming_from_hist) > 0:
-                    came_from_last = coming_from_hist[-1]
-                else:
-                    came_from_last = None
+                    if direction == TOP:
+                        new_y = (y - 1) % len(vision_maze)
+                        new_x = x
+                        coming_from = BOTTOM
+                    elif direction == BOTTOM:
+                        new_y = (y + 1) % len(vision_maze)
+                        new_x = x
+                        coming_from = TOP
+                    elif direction == LEFT:
+                        new_y = y
+                        new_x = (x - 1) % len(vision_maze[0])
+                        coming_from = RIGHT
+                    elif direction == RIGHT:
+                        new_y = y
+                        new_x = (x + 1) % len(vision_maze[0])
+                        coming_from = LEFT
 
-                authorised_mov = True
+                    if len(coming_from_hist) > 0:
+                        came_from_last = coming_from_hist[-1]
+                    else:
+                        came_from_last = None
 
-                if case_type == PATH1:
-                    if direction == TOP and came_from_last not in [LEFT, TOP, None]:
-                        authorised_mov = False
-                    elif direction == LEFT and came_from_last not in [TOP, LEFT, None]:
-                        authorised_mov = False
-                    elif direction == BOTTOM and came_from_last not in [RIGHT, BOTTOM, None]:
-                        authorised_mov = False
-                    elif direction == RIGHT and came_from_last not in [BOTTOM, RIGHT, None]:
-                        authorised_mov = False
+                    authorised_mov = True
 
-                elif case_type == PATH2:
-                    if direction == TOP and came_from_last not in [RIGHT, TOP, None]:
-                        authorised_mov = False
-                    elif direction == RIGHT and came_from_last not in [TOP, RIGHT, None]:
-                        authorised_mov = False
-                    elif direction == BOTTOM and came_from_last not in [LEFT, BOTTOM, None]:
-                        authorised_mov = False
-                    elif direction == LEFT and came_from_last not in [BOTTOM, LEFT, None]:
-                        authorised_mov = False
+                    if case_type == PATH1:
+                        if direction == TOP and came_from_last not in [LEFT, TOP, None]:
+                            authorised_mov = False
+                        elif direction == LEFT and came_from_last not in [TOP, LEFT, None]:
+                            authorised_mov = False
+                        elif direction == BOTTOM and came_from_last not in [RIGHT, BOTTOM, None]:
+                            authorised_mov = False
+                        elif direction == RIGHT and came_from_last not in [BOTTOM, RIGHT, None]:
+                            authorised_mov = False
 
-                elif case_type == WUMPUS or case_type == SLIMEPIT:
-                    authorised_mov = False
-                
-                if authorised_mov:
-                    coming_from_hist.append(coming_from)
-                    if len(coming_from_hist) > 2:
-                        coming_from_hist.pop(0)
-                    vision_maze[y][x] = 1
-                    vision_maze[new_y][new_x] = 2
-                    if maze[new_y][new_x] == WUMPUS or maze[new_y][new_x] == SLIMEPIT:
-                        for row in range(len(vision_maze)):
-                            for col in range(len(vision_maze[0])):
-                                if vision_maze[row][col] != 2:
-                                    vision_maze[row][col] = 1
-                
-                return vision_maze
+                    elif case_type == PATH2:
+                        if direction == TOP and came_from_last not in [RIGHT, TOP, None]:
+                            authorised_mov = False
+                        elif direction == RIGHT and came_from_last not in [TOP, RIGHT, None]:
+                            authorised_mov = False
+                        elif direction == BOTTOM and came_from_last not in [LEFT, BOTTOM, None]:
+                            authorised_mov = False
+                        elif direction == LEFT and came_from_last not in [BOTTOM, LEFT, None]:
+                            authorised_mov = False
+
+                    elif case_type == WUMPUS or case_type == SLIMEPIT:
+                        authorised_mov = False
+                    
+                    if authorised_mov :
+                        coming_from_hist.append(coming_from)
+                        if len(coming_from_hist) > 2:
+                            coming_from_hist.pop(0)
+                        vision_maze[y][x] = 1
+                        vision_maze[new_y][new_x] = 2
+                        if maze[new_y][new_x] == WUMPUS or maze[new_y][new_x] == SLIMEPIT:
+                            for row in range(len(vision_maze)):
+                                for col in range(len(vision_maze[0])):
+                                    if vision_maze[row][col] != 2:
+                                        vision_maze[row][col] = 1
+                    
+                    return vision_maze
     return vision_maze
+
+# j'ai des erreurs il fauttrouver d'ou ça vient
+def player_bats_interaction(maze, vision_maze, bats, x, y):
+    # 1 → chauve-souris neuve 2 → chauve-souris activé 3 → chauve souris téléporte
+    player_moved = False
+    if bats[y][x] > 1:
+        player_moved = True
+        #déplacer le joueur
+        vision_maze[y][x] = 1 #enleve le joueur de la ou il est
+        new_spot = starting_point(maze)
+        vision_maze[new_spot[1]][new_spot[0]] = 2
+        #déplacer la chauve-souris
+        bats[y][x] = 0
+        changed = False
+        while not changed:
+            new_x = randint(0,7)
+            new_y = randint(0,5)
+            if bats[new_y][new_x] == 0:
+                changed = True
+                bats[new_y][new_x] = 1
+    else:
+        if bats[y][x] != 0:
+            bats[y][x] += 1
+
+    return player_moved

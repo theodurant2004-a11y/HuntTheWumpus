@@ -375,6 +375,8 @@ body {
     max-height: 70vh;
     aspect-ratio: 8/6;
     margin-bottom: 20%;
+    border: 0;
+    border-collapse: collapse;
 }
 
 .maze_tr {
@@ -388,6 +390,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
+    transform: scale(101%);
 }
 
 .case_type_0 {
@@ -422,7 +425,7 @@ body {
     background-image: url("../ASSETS/IMAGES/mazeImages/Case.png"), url("../ASSETS/IMAGES/mazeImages/Wumpus.png");
 }
 
-.maze_bat, .maze_player {
+.maze_bat, .maze_player, .triggered_bat {
     position: absolute; 
     top: 0;
     left: 0;
@@ -442,4 +445,10 @@ body {
     background-image: url("../ASSETS/IMAGES/mazeImages/brownBat.png"); 
     background-size: 70%; 
     z-index: 5; 
+}
+
+.triggered_bat {
+    background-image: url("../ASSETS/IMAGES/mazeImages/r_triggered_bat.png");
+    background-size: 60%;
+    z-index: 5;
 }
