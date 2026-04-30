@@ -253,7 +253,7 @@ def move(maze, vision_maze, direction, coming_from_hist, bats):
             if vision_maze[y][x] == 2:
                 case_type = maze[y][x]
 
-                if not player_bats_interaction(maze, vision_maze, bats, x, y) and direction != 5:
+                if not player_bats_interaction(maze, vision_maze, bats, x, y) and direction != -1:
 
                     if direction == TOP:
                         new_y = (y - 1) % len(vision_maze)
@@ -317,16 +317,14 @@ def move(maze, vision_maze, direction, coming_from_hist, bats):
                     return vision_maze
     return vision_maze
 
-# j'ai des erreurs il fauttrouver d'ou ça vient
 def player_bats_interaction(maze, vision_maze, bats, x, y):
-    # 1 → chauve-souris neuve 2 → chauve-souris activé 3 → chauve souris téléporte
     player_moved = False
     if bats[y][x] > 1:
         player_moved = True
         #déplacer le joueur
         vision_maze[y][x] = 1 #enleve le joueur de la ou il est
         new_spot = starting_point(maze)
-        vision_maze[new_spot[1]][new_spot[0]] = 2
+        vision_maze[new_spot[1]][new_spot[0]] = 2 #replace le joueur
         #déplacer la chauve-souris
         bats[y][x] = 0
         changed = False

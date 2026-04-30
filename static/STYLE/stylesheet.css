@@ -452,3 +452,42 @@ body {
     background-size: 60%;
     z-index: 5;
 }
+
+/* --- MESSAGE DE DEFAITE --- */
+.pannel {/* à faire fusionner avec popup de théo */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ed3833;
+    border: 0.3vw solid #fdfd96; 
+    padding: 2%;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 0 1vw rgba(253, 253, 150, 0.8);
+    width: 60%;
+    max-width: 500px;
+}
+
+.pannel p {
+    color: white;
+    font-size: 110%;
+    margin-bottom: 5%;
+    line-height: 1.5;
+}
+
+.pannel_btn {
+    background-color: black;
+    color: #fdfd96;
+    border: 0.1vw solid #fdfd96;
+    padding: 2% 5%;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 100%;
+    transition: transform 0.1s;
+}
+
+.pannel_btn:hover {
+    transform: scale(1.1);
+    background-color: #222;
+}

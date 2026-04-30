@@ -6,9 +6,12 @@ TOP = 99
 BOTTOM = 98
 LEFT = 97
 RIGHT = 96
+NONE = -1
 
-# TMP
+# TMP --> à récuprer en session
 DIFFICULTY = 1
+BLIND_MODE = False
+EXPRESS_MODE = False # à intégrer
 #############
 
 game_bp = Blueprint('game', __name__)
@@ -48,98 +51,37 @@ def gameScreen():
 
     return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
 
-@game_bp.route('/Maze')
+
+
+@game_bp.route('/move/<direction>')
 @login_required
-def showMaze():
+def handle_move(direction):
     if 'maze' not in session:
         return redirect(url_for('game.gameScreen'))
-    
-    maze = session['maze']
-    vision_maze = session['vision_maze']
-    coming_from_hist = session['coming_from_hist']
-    bats_maze = session['bats_maze']
 
-    # TODO : faire en sorte que ça ne soit pas TOP mais une valeur qui dis qu'on ne se déplace pas vraiment
-    vision_maze = mazeGeneration.move(maze, vision_maze, 5, coming_from_hist, bats_maze)
+    directions_map = {
+        'up': TOP,
+        'down': BOTTOM,
+        'left': LEFT,
+        'right': RIGHT,
+        'none': NONE
+    }
 
-    # session['vision_maze'] = vision_maze
-    # session['coming_from_hist'] = coming_from_hist
-
-    session.modified = True
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
-
-@game_bp.route('/move/up')
-@login_required
-def moveUp():
-    if 'maze' not in session:
-        return redirect(url_for('game.gameScreen'))
+    move_val = directions_map.get(direction, NONE)
 
     maze = session['maze']
     vision_maze = session['vision_maze']
     coming_from_hist = session['coming_from_hist']
     bats_maze = session['bats_maze']
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, TOP, coming_from_hist, bats_maze)
+    new_vision = mazeGeneration.move(maze, vision_maze, move_val, coming_from_hist, bats_maze)
 
-    session['vision_maze'] = vision_maze
+    session['vision_maze'] = new_vision
     session['coming_from_hist'] = coming_from_hist
-
     session.modified = True
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
 
-@game_bp.route('/move/down')
-@login_required
-def moveDown():
-    if 'maze' not in session:
-        return redirect(url_for('game.gameScreen'))
-    
-    maze = session['maze']
-    vision_maze = session['vision_maze']
-    coming_from_hist = session['coming_from_hist']
-    bats_maze = session['bats_maze']
+    display_vision = new_vision
+    if BLIND_MODE:
+        display_vision = [[cell if cell == 2 else 0 for cell in row] for row in new_vision]
 
-    vision_maze = mazeGeneration.move(maze, vision_maze, BOTTOM, coming_from_hist, bats_maze)
-
-    session['vision_maze'] = vision_maze
-    session['coming_from_hist'] = coming_from_hist
-
-    session.modified = True
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
-
-@game_bp.route('/move/left')
-@login_required
-def moveLeft():
-    if 'maze' not in session:
-        return redirect(url_for('game.gameScreen'))
-    
-    maze = session['maze']
-    vision_maze = session['vision_maze']
-    coming_from_hist = session['coming_from_hist']
-    bats_maze = session['bats_maze']
-
-    vision_maze = mazeGeneration.move(maze, vision_maze, LEFT, coming_from_hist, bats_maze)
-
-    session['vision_maze'] = vision_maze
-    session['coming_from_hist'] = coming_from_hist
-
-    session.modified = True
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
-
-@game_bp.route('/move/right')
-@login_required
-def moveRight():
-    if 'maze' not in session:
-        return redirect(url_for('game.gameScreen'))
-    
-    maze = session['maze']
-    vision_maze = session['vision_maze']
-    coming_from_hist = session['coming_from_hist']
-    bats_maze = session['bats_maze']
-
-    vision_maze = mazeGeneration.move(maze, vision_maze, RIGHT, coming_from_hist, bats_maze)
-
-    session['vision_maze'] = vision_maze
-    session['coming_from_hist'] = coming_from_hist
-
-    session.modified = True
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
+    return render_template('gameScreen.html', maze=maze, vision_maze=display_vision, bats=bats_maze)
