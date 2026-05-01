@@ -8,12 +8,6 @@ LEFT = 97
 RIGHT = 96
 NONE = -1
 
-# --> à récuprer en session
-DIFFICULTY = 1
-BLIND_MODE = False
-EXPRESS_MODE = False
-#############
-
 game_bp = Blueprint('game', __name__)
 
 @game_bp.route('/podiumScreen')
@@ -33,7 +27,8 @@ def podiumScreen():
 @game_bp.route('/gameScreen')
 @login_required
 def gameScreen():
-    avatar_du_joueur = session.get('joueur_avatar', '1.png') 
+    avatar_du_joueur = session.get('joueur_avatar', '1.png')
+    DIFFICULTY = session.get('difficulty', 1)
     #c'est au cas ou y a un bug dans la session, on s'en fous de l'avatar donc on en donne un par défault si il en a pas 
 
     maze = mazeGeneration.generateMaze(DIFFICULTY)
@@ -67,6 +62,8 @@ def handle_move(direction):
 
     move_val = directions_map.get(direction, NONE)
 
+    blind_mode = session.get('blind_mode', False)
+    express_mode = session.get('express_mode', False) 
     maze = session['maze']
     vision_maze = session['vision_maze']
     coming_from_hist = session['coming_from_hist']
@@ -75,7 +72,7 @@ def handle_move(direction):
     new_vision = mazeGeneration.move(maze, vision_maze, move_val, coming_from_hist, bats_maze)
 
     # Gestion du mode express
-    if EXPRESS_MODE and move_val != NONE:
+    if express_mode and move_val != NONE:
         while mazeGeneration.is_in_corridor(maze, new_vision):
             
             # si le joueur est sur une chauve souris on stop
@@ -103,7 +100,29 @@ def handle_move(direction):
 
     # Gestion du blind mode
     display_vision = new_vision
-    if BLIND_MODE:
+    if blind_mode:
         display_vision = [[cell if cell == 2 else 0 for cell in row] for row in new_vision]
 
     return render_template('gameScreen.html', maze=maze, vision_maze=display_vision, bats=bats_maze)
+
+@game_bp.route('/shoot/<direction>')
+@login_required
+def handle_shoot(direction):
+    if 'maze' not in session:
+        return redirect(url_for('game.gameScreen'))
+
+    directions_map = {
+        'up': TOP,
+        'down': BOTTOM,
+        'left': LEFT,
+        'right': RIGHT,
+        'none': NONE
+    }
+
+    bats_maze = session['bats_maze']
+    maze = session['maze']
+    vision_maze = session['vision_maze']
+
+    #mecanique de tir
+    #return avec la victoire ou la défaite
+    return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)

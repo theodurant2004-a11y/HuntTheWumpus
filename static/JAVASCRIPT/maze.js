@@ -1,7 +1,6 @@
 let foundTriggeredBat = document.querySelector(".triggered_bat");
 let foundLostPanel = document.querySelector(".pannel"); 
 let blockedMovement = false;
-let firemode = false;
 
 if (foundTriggeredBat) {
     blockedMovement = true;
@@ -22,20 +21,13 @@ document.addEventListener('keydown', (event) => {
 
     if (key === "Space" || key === " ") {
         event.preventDefault();
-        firemode = !firemode;
-        console.log("Fire mode:", firemode ? "ON" : "OFF");
-        //changer l'interface pour qu'on comprenne qu'on est en firemode
+        window.location.replace("/shoot/none");
         return;
     }
 
     if (arrows.includes(key)) {
         event.preventDefault();
-
-        if (firemode) {
-            handleShoot(key);
-        } else {
-            handleMove(key);
-        }
+        handleMove(key);
     }
 });
 
@@ -46,12 +38,4 @@ function handleMove(key) {
         case "ArrowLeft":  window.location.replace("/move/left"); break;
         case "ArrowRight": window.location.replace("/move/right"); break;
     }
-}
-
-function handleShoot(key) {
-    let direction = key.replace("Arrow", "").toLowerCase();
-    console.log("Tir déclenché vers : " + direction);
-    
-    // mettre la mécanique de tir
-    // window.location.replace("/shoot/" + direction);
 }
