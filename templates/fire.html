@@ -1,0 +1,25 @@
+{% extends "game_base.html" %}
+
+{% block title %}Fire Mode{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ url_for('static', filename='JAVASCRIPT/shoot.js')}}" defer></script>
+{% endblock %}
+
+{% block body_class %}fire_mode{% endblock %}
+
+{% block fire_mode_overlay %}
+    <div class="fire_ui_container">
+        <h1 class="fire_alert_text">FIRE MODE ACTIVATED</h1>
+        <p class="fire_subtext">press SPACE to cancel</p>
+
+        <div class="fire_controls">
+            <button class="fire_btn up" onclick="handleShoot('ArrowUp')">↑</button>
+            <div class="fire_horizontal">
+                <button class="fire_btn left" onclick="handleShoot('ArrowLeft')">←</button>
+                <button class="fire_btn right" onclick="handleShoot('ArrowRight')">→</button>
+            </div>
+            <button class="fire_btn down" onclick="handleShoot('ArrowDown')">↓</button>
+        </div>
+    </div>
+{% endblock %}
