@@ -8,10 +8,10 @@ LEFT = 97
 RIGHT = 96
 NONE = -1
 
-# TMP --> à récuprer en session
+# --> à récuprer en session
 DIFFICULTY = 1
 BLIND_MODE = False
-EXPRESS_MODE = False # à intégrer
+EXPRESS_MODE = False
 #############
 
 game_bp = Blueprint('game', __name__)
@@ -51,8 +51,6 @@ def gameScreen():
 
     return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
 
-
-
 @game_bp.route('/move/<direction>')
 @login_required
 def handle_move(direction):
@@ -76,10 +74,34 @@ def handle_move(direction):
 
     new_vision = mazeGeneration.move(maze, vision_maze, move_val, coming_from_hist, bats_maze)
 
+    # Gestion du mode express
+    if EXPRESS_MODE and move_val != NONE:
+        while mazeGeneration.is_in_corridor(maze, new_vision):
+            
+            # si le joueur est sur une chauve souris on stop
+            for y in range(len(new_vision)):
+                for x in range(len(new_vision[0])):
+                    if new_vision[y][x] == 2:
+
+                        # si on passe sur une chauve souris ou stop
+                        if x != -1 and bats_maze[y][x] > 0:
+                            break
+
+            # determination du prochain mouvement automatique
+            next_move = mazeGeneration.get_next_corridor_direction(maze, new_vision, coming_from_hist)
+            
+            if next_move == NONE:
+                break
+                
+            # execution du mouvement automatique
+            new_vision = mazeGeneration.move(maze, new_vision, next_move, coming_from_hist, bats_maze)
+
+    #actualisation des variables sessions
     session['vision_maze'] = new_vision
     session['coming_from_hist'] = coming_from_hist
     session.modified = True
 
+    # Gestion du blind mode
     display_vision = new_vision
     if BLIND_MODE:
         display_vision = [[cell if cell == 2 else 0 for cell in row] for row in new_vision]

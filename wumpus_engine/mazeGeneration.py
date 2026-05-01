@@ -12,11 +12,11 @@ BLOODMARKED = 5
 SLIMENBLOOD = 6
 WUMPUS = 7
 
-JUSTLOAD = 100
 TOP = 99
 BOTTOM = 98
 LEFT = 97
 RIGHT = 96
+NONE = -1
 
 def create_maze(difficulty):
     maze = [[CAVERN for _ in range(8)] for _ in range(6)]
@@ -339,3 +339,43 @@ def player_bats_interaction(maze, vision_maze, bats, x, y):
             bats[y][x] += 1
 
     return player_moved
+
+def is_in_corridor(maze, vision_maze):
+    for y in range(len(vision_maze)):
+        for x in range(len(vision_maze[0])):
+            if vision_maze[y][x] == 2: 
+                case_type = maze[y][x]
+                if case_type == PATH1 or case_type == PATH2:
+                    return True
+                return False
+    return False
+
+def get_next_corridor_direction(maze, vision_maze, coming_from_hist):
+    player_x, player_y = -1, -1
+    for y in range(len(vision_maze)):
+        for x in range(len(vision_maze[0])):
+            if vision_maze[y][x] == 2:
+                player_x, player_y = x, y
+                break
+
+    if player_x == -1:
+        return NONE
+
+    case_type = maze[player_y][player_x]
+    
+    came_from = None
+    if len(coming_from_hist) > 0:
+        came_from = coming_from_hist[-1]
+
+    if case_type == PATH1: 
+        if came_from == LEFT: return TOP
+        if came_from == TOP: return LEFT
+        if came_from == RIGHT: return BOTTOM
+        if came_from == BOTTOM: return RIGHT
+
+    elif case_type == PATH2: 
+        if came_from == LEFT: return BOTTOM
+        if came_from == BOTTOM: return LEFT
+        if came_from == RIGHT: return TOP
+        if came_from == TOP: return RIGHT
+    return NONE
