@@ -119,10 +119,19 @@ def handle_shoot(direction):
         'none': NONE
     }
 
+    direction = directions_map.get(direction, NONE)
     bats_maze = session['bats_maze']
     maze = session['maze']
     vision_maze = session['vision_maze']
 
     #mecanique de tir
-    #return avec la victoire ou la défaite
-    return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
+    if(direction != NONE):
+        game_won = mazeGeneration.get_arrow_outcome(maze, vision_maze, direction)
+        #return avec la victoire ou la défaite
+    else:
+        game_won = None
+
+    if( game_won ):
+        pass
+        # ajouter la modification en DB pour dire +1 en nombre de victoire
+    return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze, game_won=game_won)

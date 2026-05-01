@@ -492,6 +492,22 @@ body {
     background-color: #222;
 }
 
+/* --- MESSAGE DE Victoire --- */
+.v-pannel {/* à faire fusionner avec popup de théo */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: green;
+    border: 0.3vw solid #fdfd96; 
+    padding: 2%;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 0 1vw rgba(253, 253, 150, 0.8);
+    width: 60%;
+    max-width: 500px;
+}
+
 /* --- MODE DE TIR --- */
 body.fire_mode {
     transition: background-color 0.3s, box-shadow 0.3s;

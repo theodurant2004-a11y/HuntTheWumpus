@@ -379,3 +379,80 @@ def get_next_corridor_direction(maze, vision_maze, coming_from_hist):
         if came_from == RIGHT: return TOP
         if came_from == TOP: return RIGHT
     return NONE
+
+def get_arrow_outcome(maze, vision_maze, direction):
+# True = victoire, False = defaite
+    if not direction == NONE:
+        for y in range(len(vision_maze)):
+            for x in range(len(vision_maze[0])):
+                if vision_maze[y][x] == 2:
+                    #on part de la position du joueur
+                    #on determine la prochaine case
+                    outcome_case = get_final_arrow_slot(maze, direction, x, y)
+                    
+                    return outcome_case == WUMPUS
+    return False
+
+
+def get_final_arrow_slot(maze, direction, x, y):
+    if direction == TOP: 
+        coming_from = BOTTOM
+        y = (y-1) % len(maze)
+    elif direction == BOTTOM: 
+        coming_from = TOP
+        y = (y+1) % len(maze)
+    elif direction == LEFT: 
+        coming_from = RIGHT
+        x = (x-1) % len(maze[0])
+    elif direction == RIGHT: 
+        coming_from = LEFT
+        x = (x+1) % len(maze[0])
+    case_type = maze[y][x]
+
+    while( case_type == PATH1 or case_type == PATH2):
+        x, y, coming_from = handle_path(maze, case_type, coming_from, x, y)
+        case_type = maze[y][x]
+    
+    return case_type
+
+    
+
+def handle_path(maze, case_type, coming_from, x, y):
+    # return next x and y coordonates and next coming from
+    if case_type == PATH1:
+        if coming_from == LEFT:
+            next_y = (y - 1) % len(maze)
+            next_x = x
+            next_coming_from = BOTTOM
+        elif coming_from == TOP:
+            next_x = (x - 1) % len(maze[0])
+            next_y = y
+            next_coming_from = RIGHT
+        elif coming_from == RIGHT:
+            next_y = (y + 1) % len(maze)
+            next_x = x
+            next_coming_from = TOP
+        elif coming_from == BOTTOM:
+            next_x = (x + 1) % len(maze[0])
+            next_y = y
+            next_coming_from = LEFT
+
+    elif case_type == PATH2:
+        if coming_from == LEFT:
+            next_y = (y + 1) % len(maze)
+            next_x = x
+            next_coming_from = TOP
+        elif coming_from == TOP:
+            next_x = (x + 1) % len(maze[0])
+            next_y = y
+            next_coming_from = LEFT
+        elif coming_from == RIGHT:
+            next_y = (y - 1) % len(maze)
+            next_x = x
+            next_coming_from = BOTTOM
+        elif coming_from == BOTTOM:
+            next_x = (x - 1) % len(maze[0])
+            next_y = y
+            next_coming_from = RIGHT
+
+    return(next_x, next_y, next_coming_from)
