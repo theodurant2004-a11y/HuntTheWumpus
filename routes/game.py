@@ -132,6 +132,14 @@ def handle_shoot(direction):
         game_won = None
 
     if( game_won ):
-        pass
         # ajouter la modification en DB pour dire +1 en nombre de victoire
+        con, cur = get_db_connection()
+        try:
+            # On sélectionne le pseudo au lieu de l'email
+            user_id = session['joueur_id']
+            cur.execute("UPDATE users SET nbvictory = nbvictory + 1 WHERE id = %s", (user_id,))
+            con.commit()
+        finally:
+            cur.close()
+            con.close()
     return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze, game_won=game_won)
