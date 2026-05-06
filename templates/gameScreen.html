@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hunt the wumpus</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/stylesheet.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='JAVASCRIPT/playerMovement.js')}}"></script>
-</head>
-<body>
-    <div id="maze_screen">
-        <table class="maze_table">
-            {% for row in maze %}
-                {% set y = loop.index0 %}
-                <tr class="maze_tr">
-                    {% for unit in row %}
-                        {% set x = loop.index0 %}
-                        {% if vision_maze[y][x] == 1 or vision_maze[y][x] == 2 %}
-                            <td class="case_type_{{ unit }}">
-                            {% if bats[y][x] == 1 %}
-                                <div class="maze_bat"></div>
-                            {% endif %}
-                            {% if vision_maze[y][x] == 2 %}
-                                <div class="maze_player"></div>
-                            {% endif %}
-                            </td>
-                        {% else %}
-                            <td></td>
-                        {% endif %} 
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
+{% extends "game_base.html" %}
+
+{% block title %}Movement{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ url_for('static', filename='JAVASCRIPT/maze.js')}}" defer></script>
+{% endblock %}
