@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session
 from wumpus_engine import mazeGeneration
-from routes.auth import login_required, get_db_connection
+from routes.auth import login_required, get_db_connection, login
 
 TOP = 99
 BOTTOM = 98
@@ -18,6 +18,9 @@ bats_maze = []
 
 game_bp = Blueprint('game', __name__)
 
+#====================
+#   PodiumScreen
+#====================
 @game_bp.route('/podiumScreen')
 @login_required#c'est le sécuriter du décorateur - Plus besoin de faire le "if session..."
 def podiumScreen():
@@ -31,6 +34,9 @@ def podiumScreen():
 
     return render_template('podiumScreen.html', players=players)
 
+#====================
+#   gameScreen
+#====================
 @game_bp.route('/gameScreen')
 @login_required
 def gameScreen():

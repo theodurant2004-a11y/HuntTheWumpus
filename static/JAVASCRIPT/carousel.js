@@ -10,23 +10,23 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = 0;
 
     function updateCarousel() {
-        // 1. On cache tout et on décoche tout
+        // On cache tout et on décoche tout
         options.forEach(opt => {
             opt.classList.remove('active', 'prev', 'next');
             opt.querySelector('input').checked = false;
         });
 
-        // 2. On calcule les index (gauche, centre, droite)
+        // On calcule les index (gauche, centre, droite)
         const total = options.length;
         const prevIndex = (currentIndex - 1 + total) % total;
         const nextIndex = (currentIndex + 1) % total;
 
-        // 3. On applique les bonnes classes
+        // On applique les bonnes classes
         options[prevIndex].classList.add('prev');
         options[currentIndex].classList.add('active');
         options[nextIndex].classList.add('next');
 
-        // 4. On coche le bouton radio caché de l'avatar au centre
+        // On coche le bouton radio caché de l'avatar au centre
         options[currentIndex].querySelector('input').checked = true;
     }
 
@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", function() {
         nextBtn.addEventListener('click', moveRight);
     }
 
-    // ==========================================
-    // NOUVEAU : NAVIGATION AU CLAVIER
-    // ==========================================
+    // ===========================
+    //   NAVIGATION AU CLAVIER
+    // ===========================
     document.addEventListener('keydown', function(event) {
         // Si l'utilisateur tape dans un champ de texte (login/password), on ne fait rien
         if (event.target.tagName === 'INPUT' && event.target.type !== 'radio') {

@@ -9,6 +9,9 @@ from functools import wraps #Décorateur
 
 auth_bp = Blueprint('auth', __name__)
 
+pseudo_regex = r'^[a-zA-Z0-9_]{3,15}$'
+password_regex = r'^(?=.*\d).{8,16}$'
+
 # ================================
 #       SÉCURITÉ (Décorateur)
 # ================================
@@ -18,7 +21,7 @@ def login_required(f):
         # Si pas de session
         if 'joueur_id' not in session:
             flash("Accès refusé. Veuillez vous connecter pour jouer !", "error")
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login'))  
         # Si session
         return f(*args, **kwargs)
     return decorated_function
@@ -77,8 +80,6 @@ def signin():
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         avatar = request.form.get('avatar')
-        pseudo_regex = r'^[a-zA-Z0-9_]{3,15}$'
-        password_regex = r'^(?=.*\d).{8,16}$'
 
         if not re.match(pseudo_regex, pseudo):
             flash("Le pseudo doit faire entre 3 et 15 caractères (sans espaces et caractères spéciaux).")
@@ -129,3 +130,45 @@ def signin():
         avatars = []
         
     return render_template('signin.html', avatars=avatars)
+
+#====================
+#   PAGE SIGN-out
+#====================
+@auth_bp.route('/logout')
+def logout():
+    session.clear() 
+    flash("Vous avez été déconnecté avec succès.")
+    return redirect(url_for('auth.login'))
+
+#====================
+#   option
+#====================
+@auth_bp.route('/options', methods=['GET', 'POST']) 
+@login_required
+def optionScreen():
+    if request.method == 'POST':
+        new_pseudo = request.form.get('new_pseudo')
+        joueur_id = session.get('joueur_id')
+
+        if not re.match(pseudo_regex, new_pseudo):
+            flash("Le pseudo doit faire entre 3 et 15 caractères (sans espaces ni caractères spéciaux).")
+            return redirect(url_for('auth.optionScreen'))
+
+        con, cur = get_db_connection()
+        try:
+            cur.execute("UPDATE users SET pseudo = %s WHERE id = %s", (new_pseudo, joueur_id))
+            con.commit()
+
+            session['joueur_pseudo'] = new_pseudo  
+            flash("Votre pseudo a été mis à jour avec succès !")
+            
+        except psycopg.IntegrityError:
+            con.rollback()
+            flash("Ce pseudo est déjà utilisé par un autre traqueur !")
+        finally:
+            cur.close()
+            con.close()
+
+        return redirect(url_for('auth.optionScreen')) 
+
+    return render_template('options.html')

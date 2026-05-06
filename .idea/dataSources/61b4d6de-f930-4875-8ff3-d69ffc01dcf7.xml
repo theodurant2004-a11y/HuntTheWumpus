@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="py15@student.endor.be">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.54">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.55">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>814654</IntrospectionStateNumber>
       <ServerVersion>15.13</ServerVersion>
-      <StartupTime>1765882360</StartupTime>
+      <StartupTime>1774625405</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1607,7 +1606,6 @@ false posixrules
 13221||10|C|G
 13221||-9223372036854775808|U|G
 13221||10|U|G</Grants>
-      <IntrospectionStateNumber>814654</IntrospectionStateNumber>
       <ObjectId>43679</ObjectId>
       <OwnerName>py15</OwnerName>
     </database>
@@ -5346,9 +5344,6 @@ false posixrules
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>814654</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>814654</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>814654</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
       <LastIntrospectionLocalTimestamp>2026-02-25.19:46:20</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>

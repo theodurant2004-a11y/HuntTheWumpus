@@ -46,6 +46,9 @@ body {
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;     /* IE10+/Edge */
+    -webkit-user-drag: none; /* Safari */
+    -moz-user-drag: none;    /* Firefox */
+    -ms-user-drag: none;    /* IE10+/Edge */
     user-select: none;
 }
 
@@ -577,6 +580,79 @@ body::after {
                 
     background-color: rgba(200, 50, 255, 0.1);
     border: 1px solid rgba(220, 100, 255, 0.5);
+}
+
+/* ===================
+   PAGE OPTIONS 
+======================
+*/
+
+.options-container {
+    max-width: 500px !important; 
+}
+.auth-wrapper h1.options-title {
+    font-size: 3rem; 
+    text-align: center;
+    color: #f0f14e;
+    margin-bottom: 5%; 
+    font-family: 'Doto-SemiBold', sans-serif; 
+}
+
+.options-back {
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* RÉGLAGE SON */
+.volume-group {
+    text-align: center;
+}
+.volume-label {
+    color: #f0f14e;
+}
+.volume-slider {
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* SÉPARATEURS */
+.options-divider {
+    border: 0;
+    border-top: 2px solid #ff5f85; 
+    margin: 20px 0;
+}
+
+/* FORMULAIRE PSEUDO */
+.pseudo-form {
+    margin-bottom: 20px;
+}
+.btn-update {
+    padding: 10px;
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 10px;
+    color: #6ded8a;
+}
+
+/* DÉCONNEXION */
+.logout-wrapper {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10%;
+
+}
+.logout-link {
+    color: #f0f14e;
+    text-decoration: underline;
+    font-family: 'Doto-regular', sans-serif;
+    font-size: 1.2rem;
+    transition: color 0.2s ease-in-out;
+}
+.logout-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #ff5f85;
 }
 
 /* 

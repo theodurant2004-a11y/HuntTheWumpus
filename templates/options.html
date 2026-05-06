@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Options{% endblock %}
+
+{% block body_content %}
+<div class="auth-wrapper">
+    <div class="main-container options-container">
+
+        <h1 class="options-title">Paramètres</h1>
+
+        <a href="{{ url_for('game.podiumScreen') }}" class="toggle-link options-back">
+            ⬅ Retour au jeu
+        </a>
+
+        <div class="form-group volume-group">
+            <label for="volume-slider" class="volume-label">Volume de la musique : <span
+                    id="volume-val">20%</span></label>
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.1" value="0.2">
+        </div>
+
+        <hr class="options-divider">
+
+        <form action="{{ url_for('auth.optionScreen') }}" method="POST" class="pseudo-form">
+            <div class="form-group">
+                <label for="new_pseudo">Nouveau Pseudo :</label>
+                <input type="text" id="new_pseudo" name="new_pseudo" value="{{ session.get('joueur_pseudo') }}">
+            </div>
+            <button type="submit" class="pixel-button btn-update">Mettre à jour</button>
+        </form>
+
+        <hr class="options-divider">
+
+        <div class="logout-wrapper">
+            <a href="{{ url_for('auth.logout') }}" class="logout-link">
+                DÉCONNEXION
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -8,6 +8,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='STYLE/test.css') }}">
+    <script src="{{ url_for('static', filename='JAVASCRIPT/audio.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='JAVASCRIPT/carousel.js') }}"></script>
 </head>
 
 <body>
@@ -59,11 +61,6 @@
     <audio id="bg-music" loop autoplay>
         <source src="{{ url_for('static', filename='ASSETS/AUDIO/theme_menu.mp3') }}" type="audio/mpeg">
     </audio>
-
-    <!-- A modif quand on fait le menu "option" -->
-    <script>
-        document.getElementById("bg-music").volume = 0.2;
-    </script>
     {% endblock %}
 </body>
 
