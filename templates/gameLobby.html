@@ -1,0 +1,58 @@
+{% extends "arcade_base.html" %}
+
+{% block title %}Arcade{% endblock %}
+
+{% block body_content %}
+
+{# url pour éviter conflit onclick#}
+{% set url_game    = url_for('game.gameScreen') %}
+{% set url_lobby   = url_for('game.difficultySelect') %}
+{% set url_fire    = url_for('game.handle_shoot', direction='none') %}
+{% set url_options = url_for('auth.optionScreen') %}
+
+<div id="maze_screen">
+
+    {# Iframe centré #}
+    <div class="arcade-zone">
+        <iframe
+            id="game-iframe"
+            src="{{ url_lobby }}"
+            title="Hunt the Wumpus">
+        </iframe>
+    </div>
+
+    {# HITBOXES INVISIBLES #}
+
+    {# START — nouvelle partie #}
+    <a href="#"
+       onclick="document.getElementById('game-iframe').src='{{ url_game }}'; return false;"
+       class="hitbox hitbox-start"
+       title="Start"></a>
+
+    {# OPTION — page options #}
+    <a href="{{ url_options }}"
+       class="hitbox hitbox-option-game"
+       title="Options"></a>
+
+    {# FIRE — mode tir dans l'iframe #}
+    <a href="#"
+       onclick="document.getElementById('game-iframe').src='{{ url_fire }}'; return false;"
+       class="hitbox hitbox-fire"
+       title="Fire"></a>
+
+    {# PAUSE — retour sélection difficulté #}
+    <a href="#"
+       onclick="document.getElementById('game-iframe').src='{{ url_lobby }}'; return false;"
+       class="hitbox hitbox-pause"
+       title="Pause"></a>
+
+</div>
+
+{% endblock %}
+
+{# Musique de jeu (Gemini est con donc ca sera la même musique que le menu) #}
+{% block audio_player %}
+<audio id="bg-music" loop autoplay>
+    <source src="{{ url_for('static', filename='ASSETS/AUDIO/theme_menu.mp3') }}" type="audio/mpeg">
+</audio>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "arcade_base.html" %}
+
+{% block title %}Sélection{% endblock %}
+
+{% block extra_head %}
+<script src="{{ url_for('static', filename='JAVASCRIPT/carousel.js') }}" defer></script>
+{% endblock %}
+
+{% block body_content %}
+<div class="diff-select-body">
+
+    {# Flash messages #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p style="color:#ff4444; font-size:0.6vw; margin-bottom:2%;">{{ messages[0] }}</p>
+        {% endif %}
+    {% endwith %}
+
+    <h2>— Prépare ta chasse —</h2>
+
+    <form action="{{ url_for('game.difficultySelect') }}" method="POST">
+
+        {# ---- DIFFICULTÉ ---- #}
+        <p class="section-label">Difficulté</p>
+        <div class="difficulty-group">
+
+            <input class="diff-radio" type="radio" name="difficulty" id="d1" value="1"
+                {% if session.get('difficulty', 1) == 1 %}checked{% endif %}>
+            <label class="diff-btn" for="d1">Facile</label>
+
+            <input class="diff-radio" type="radio" name="difficulty" id="d2" value="2"
+                {% if session.get('difficulty', 1) == 2 %}checked{% endif %}>
+            <label class="diff-btn" for="d2">Moyen</label>
+
+            <input class="diff-radio" type="radio" name="difficulty" id="d3" value="3"
+                {% if session.get('difficulty', 1) == 3 %}checked{% endif %}>
+            <label class="diff-btn" for="d3">Difficile</label>
+
+        </div>
+
+        <div class="sep"></div>
+
+        {# ---- PERSONNAGE (carrousel) ---- #}
+        <p class="section-label">Personnage</p>
+        <div class="iframe-carousel-wrapper">
+            <span class="iframe-arrow" id="prev-btn">&#8592;</span>
+            <div class="iframe-carousel" id="carousel">
+                {% for avatar in avatars %}
+                    <label class="char-option">
+                        <input type="radio" name="avatar" value="{{ avatar }}" required
+                            {% if session.get('game_avatar') == avatar %}checked{% endif %}>
+                        <img src="{{ url_for('static', filename='ASSETS/IMAGES/iconProfil/' ~ avatar) }}"
+                             alt="Avatar {{ loop.index }}">
+                    </label>
+                {% endfor %}
+            </div>
+            <span class="iframe-arrow" id="next-btn">&#8594;</span>
+        </div>
+
+        <div class="sep"></div>
+
+        {# ---- MODES ---- #}
+        <div class="modes-group">
+            <label class="mode-label">
+                <input type="checkbox" name="blind_mode" value="1"
+                    {% if session.get('blind_mode') %}checked{% endif %}>
+                Blind Mode
+            </label>
+            <label class="mode-label">
+                <input type="checkbox" name="express_mode" value="1"
+                    {% if session.get('express_mode') %}checked{% endif %}>
+                Express Mode
+            </label>
+        </div>
+
+        {# ---- PLAY ---- #}
+        <button type="submit" class="play-btn-arcade">&#9654; PLAY</button>
+
+    </form>
+</div>
+{% endblock %}
+
+{# Pas de musique dans l'iframe #}
+{% block audio_player %}{% endblock %}
