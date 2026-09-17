@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3d3b680-0793-4bf8-b5b4-9ae4cd459d34" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/61b4d6de-f930-4875-8ff3-d69ffc01dcf7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/61b4d6de-f930-4875-8ff3-d69ffc01dcf7.xml" afterDir="false" />
+    <list default="true" id="3d3e77ae-f2ef-4d14-8f78-b8773dea32d0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/61b4d6de-f930-4875-8ff3-d69ffc01dcf7.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/JAVASCRIPT/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/JAVASCRIPT/carousel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/STYLE/test.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/STYLE/test.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/podiumScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/podiumScreen.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/fire.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fire.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/options.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/options.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +28,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
 }</component>
-  <component name="ProjectId" id="39veaC4xw4FBoHEjBvE9RXdcQ4i" />
+  <component name="ProjectId" id="3E7TLNKvtYY97QmDnsrzrvcHiRk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,34 +39,28 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;branchTheo&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/theod/Desktop/HuntTheWumpus&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/theod/Documents/Durant-Dellisse-HuntTheWumpus/Durant-Dellisse-HuntTheWumpus&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
-    ]
   }
 }</component>
-  <component name="RunManager" selected="Flask server.HuntTheWumpus">
-    <configuration name="HuntTheWumpus" type="PythonConfigurationType" factoryName="Python">
-      <module name="HuntTheWumpus" />
+  <component name="RunManager">
+    <configuration name="Durant-Dellisse-HuntTheWumpus" type="PythonConfigurationType" factoryName="Python">
+      <module name="Durant-Dellisse-HuntTheWumpus" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -87,65 +84,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="HuntTheWumpus" type="Python.FlaskServer">
-      <module name="HuntTheWumpus" />
-      <option name="target" value="$PROJECT_DIR$/app.py" />
-      <option name="targetType" value="PATH" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3bd3a6803838-JavaScript-PY-261.22158.340" />
-        <option value="bundled-python-sdk-b63d5a1f7c97-b61e75351b1f-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.22158.340" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PY-261.24374.152" />
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d3d3b680-0793-4bf8-b5b4-9ae4cd459d34" name="Changes" comment="" />
-      <created>1771581032730</created>
+      <changelist id="3d3e77ae-f2ef-4d14-8f78-b8773dea32d0" name="Changes" comment="" />
+      <created>1779528551749</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1771581032730</updated>
-      <workItem from="1771844790270" duration="2658000" />
-      <workItem from="1772026197330" duration="1219000" />
-      <workItem from="1772027478227" duration="1350000" />
-      <workItem from="1772048630724" duration="12897000" />
-      <workItem from="1772463926337" duration="26000" />
-      <workItem from="1772703884677" duration="9029000" />
-      <workItem from="1773600465803" duration="998000" />
-      <workItem from="1775891151464" duration="3492000" />
-      <workItem from="1777030763913" duration="937000" />
-      <workItem from="1777633089809" duration="45000" />
+      <updated>1779528551749</updated>
+      <workItem from="1779528553092" duration="930000" />
+      <workItem from="1779530674902" duration="657000" />
+      <workItem from="1779533203226" duration="316000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

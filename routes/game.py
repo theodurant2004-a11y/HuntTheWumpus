@@ -89,7 +89,8 @@ def gameScreen():
     session['coming_from_hist'] = coming_from_hist
     session['bats_maze'] = bats_maze
 
-    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze)
+    # game_over=False : partie qui commence, rien à révéler
+    return render_template('gameScreen.html', maze=maze, vision_maze=vision_maze, bats=bats_maze, game_over=False, coming_from=None)
 
 #====================
 #   Mouvement
@@ -147,7 +148,11 @@ def handle_move(direction):
     if blind_mode:
         display_vision = [[cell if cell == 2 else 0 for cell in row] for row in new_vision]
 
-    return render_template('gameScreen.html', maze=maze, vision_maze=display_vision, bats=bats_maze)
+    # coming_from = dernière direction mémorisée (pour positionner le joueur dans le couloir)
+    coming_from = coming_from_hist[-1] if coming_from_hist else None
+
+    # game_over=False : la défaite par piège est détectée côté Jinja2
+    return render_template('gameScreen.html', maze=maze, vision_maze=display_vision, bats=bats_maze, game_over=False, coming_from=coming_from)
 
 #====================
 #   Tir
@@ -186,4 +191,10 @@ def handle_shoot(direction):
             cur.close()
             con.close()
 
-    return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze, game_won=game_won)
+    # coming_from = dernière direction mémorisée
+    coming_from_hist = session.get('coming_from_hist', [])
+    coming_from = coming_from_hist[-1] if coming_from_hist else None
+
+    # game_over=True uniquement si tir résolu (victoire ou défaite), pas si annulé (None)
+    game_over = game_won is not None
+    return render_template('fire.html', maze=maze, vision_maze=vision_maze, bats=bats_maze, game_won=game_won, game_over=game_over, coming_from=coming_from)

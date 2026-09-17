@@ -6,11 +6,33 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv #fichier .env
 import re #pour les regex
 from functools import wraps #Décorateur
+from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired  # CSRF
 
 auth_bp = Blueprint('auth', __name__)
 
 pseudo_regex = r'^[a-zA-Z0-9_]{3,15}$'
 password_regex = r'^(?=.*\d).{8,16}$'
+
+# ================================
+#       CSRF
+# ================================
+def generate_csrf_token():
+    """Génère un token signé et le stocke en session."""
+    s = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
+    token = s.dumps(session.get('joueur_id', 'anonymous'))
+    session['csrf_token'] = token
+    return token
+
+def verify_csrf_token(token):
+    """Vérifie que le token reçu est valide et correspond à celui en session."""
+    if not token:
+        return False
+    s = URLSafeTimedSerializer(os.getenv("SECRET_KEY"))
+    try:
+        s.loads(token, max_age=3600)  # expire après 1h
+    except (BadSignature, SignatureExpired):
+        return False
+    return token == session.get('csrf_token')
 
 # ================================
 #       SÉCURITÉ (Décorateur)
@@ -48,6 +70,11 @@ def get_db_connection():
 @auth_bp.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        # Vérification CSRF
+        if not verify_csrf_token(request.form.get('csrf_token')):
+            flash("Requête invalide, veuillez réessayer.")
+            return redirect(url_for('auth.login'))
+
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         con, cur = get_db_connection()
@@ -66,10 +93,13 @@ def login():
                 flash("Informations invalides.")
                 return redirect(url_for('auth.login'))            
         finally:
-            # On ferme manuellement (le prof il veut)
+            # On ferme manuellement 
             cur.close()
             con.close()
-    return render_template("index.html")
+
+    # token et on le passe au template
+    csrf_token = generate_csrf_token()
+    return render_template("index.html", csrf_token=csrf_token)
 
 #====================
 #   PAGE SIGN-IN
@@ -77,6 +107,11 @@ def login():
 @auth_bp.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
+        # Vérification CSRF
+        if not verify_csrf_token(request.form.get('csrf_token')):
+            flash("Requête invalide, veuillez réessayer.")
+            return redirect(url_for('auth.signin'))
+
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         avatar = request.form.get('avatar')
@@ -100,7 +135,6 @@ def signin():
             #reprendre l'id du nouveau users
             new_user = cur.fetchone()
             user_id = new_user['id']
-            # commit "prof=> toujours a la connection gnagnagna"
             con.commit() 
 
             session['joueur_id'] = user_id
@@ -121,18 +155,20 @@ def signin():
             cur.close()
             con.close() # Fermeture manuel
 
-    # --- PARTIE GET (Chargement normal de la page) ---
+    #GET (Chargement normal de la page)
     avatar_dir = os.path.join(current_app.static_folder, 'ASSETS', 'IMAGES', 'iconProfil')
     try:
         avatars = [f for f in os.listdir(avatar_dir) if f.endswith('.png')]
         avatars.sort(key=lambda x: int(x.split('.')[0])) 
     except FileNotFoundError:
         avatars = []
-        
-    return render_template('signin.html', avatars=avatars)
+
+    # GET : on génère un token et on le passe au template
+    csrf_token = generate_csrf_token()
+    return render_template('signin.html', avatars=avatars, csrf_token=csrf_token)
 
 #====================
-#   PAGE SIGN-out
+#   PAGE SIGN-OUT
 #====================
 @auth_bp.route('/logout')
 def logout():
@@ -141,12 +177,17 @@ def logout():
     return redirect(url_for('auth.login'))
 
 #====================
-#   option
+#   OPTIONS
 #====================
 @auth_bp.route('/options', methods=['GET', 'POST']) 
 @login_required
 def optionScreen():
     if request.method == 'POST':
+        # Vérification CSRF
+        if not verify_csrf_token(request.form.get('csrf_token')):
+            flash("Requête invalide, veuillez réessayer.")
+            return redirect(url_for('auth.optionScreen'))
+
         new_pseudo = request.form.get('new_pseudo')
         joueur_id = session.get('joueur_id')
 
@@ -171,4 +212,6 @@ def optionScreen():
 
         return redirect(url_for('auth.optionScreen')) 
 
-    return render_template('options.html')
+    # GET on génère un token et on le passe au template
+    csrf_token = generate_csrf_token()
+    return render_template('options.html', csrf_token=csrf_token)

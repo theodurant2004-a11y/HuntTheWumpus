@@ -9,16 +9,18 @@
 {% block body_class %}fire_mode{% endblock %}
 
 {% block fire_mode_overlay %}
-<div class="fire_ui_container">
-    <p class="fire_alert_text">FIRE MODE</p>
-    <p class="fire_subtext">ESPACE pour annuler</p>
-    <div class="fire_controls">
-        <button class="fire_btn up"    onclick="handleShoot('ArrowUp')">&#8593;</button>
-        <div class="fire_horizontal">
-            <button class="fire_btn left"  onclick="handleShoot('ArrowLeft')">&#8592;</button>
-            <button class="fire_btn right" onclick="handleShoot('ArrowRight')">&#8594;</button>
+    {% if game_won is none %}
+    <div class="fire_ui_container">
+        <p class="fire_alert_text">FIRE MODE</p>
+        <p class="fire_subtext">ESPACE pour annuler</p>
+        <div class="fire_controls">
+            <button class="fire_btn up"    onclick="handleShoot('ArrowUp')">&#8593;</button>
+            <div class="fire_horizontal">
+                <button class="fire_btn left"  onclick="handleShoot('ArrowLeft')">&#8592;</button>
+                <button class="fire_btn right" onclick="handleShoot('ArrowRight')">&#8594;</button>
+            </div>
+            <button class="fire_btn down"  onclick="handleShoot('ArrowDown')">&#8595;</button>
         </div>
-        <button class="fire_btn down"  onclick="handleShoot('ArrowDown')">&#8595;</button>
     </div>
-</div>
+    {% endif %}
 {% endblock %}

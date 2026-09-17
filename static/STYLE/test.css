@@ -644,19 +644,22 @@ body::after {
 
 .iframe-game-body .result-title,
 .iframe-game-body .fire_alert_text {
-    font-size: 5vw;
+    font-size: 5.5vw;
+    letter-spacing: 5px;
 }
 
 .iframe-game-body .result-sub,
 .iframe-game-body .fire_subtext {
-    font-size: 2vw;
+    font-size: 2.2vw;
     margin-bottom: 4vw;
+    opacity: 1;
 }
 
 .iframe-game-body .pannel_btn,
 .iframe-game-body .fire_btn {
-    font-size: 2vw;
+    font-size: 2.2vw;
     padding: 1vw 2vw;
+    letter-spacing: 2px;
 }
 .arcade-zone {
     position: absolute;
@@ -710,7 +713,15 @@ body::after {
     background-image: url('../ASSETS/IMAGES/mazeImages/Char.png');
     background-size: 20%;
     z-index: 10;
+    transition: background-position 0.15s ease;
 }
+
+/* Positionnement dans le couloir selon direction d'arrivée */
+/* Les couloirs Path1/Path2 sont des diagonales — on décale en conséquence */
+.maze_player.player-from-top    { background-position: center 25%; }
+.maze_player.player-from-bottom { background-position: center 75%; }
+.maze_player.player-from-left   { background-position: 25% center; }
+.maze_player.player-from-right  { background-position: 75% center; }
 
 .maze_bat {
     background-image: url('../ASSETS/IMAGES/mazeImages/brownBat.png');
@@ -820,19 +831,19 @@ body::after {
 }
 
 .result-title {
-    font-family: 'Doto-SemiBold', sans-serif;
+    font-family: 'Doto-Bold', sans-serif;
     font-size: 2.5vw;
     margin-bottom: 0.5vw;
-    letter-spacing: 3px;
-    text-shadow: 0 0 20px currentColor;
+    letter-spacing: 4px;
+    text-shadow: 0 0 25px currentColor, 0 0 50px currentColor;
 }
 
 .result-sub {
-    font-family: 'Doto-regular', sans-serif;
-    font-size: 0.8vw;
+    font-family: 'Doto-SemiBold', sans-serif;
+    font-size: 0.85vw;
     margin-bottom: 1.5vw;
-    opacity: 0.7;
-    letter-spacing: 2px;
+    opacity: 0.9;
+    letter-spacing: 3px;
     text-align: center;
     padding: 0 10%;
 }
@@ -843,14 +854,14 @@ body::after {
 .panel-buttons { display: flex; gap: 1vw; }
 
 .pannel_btn {
-    font-family: 'Doto-regular', sans-serif;
-    font-size: 0.8vw;
+    font-family: 'Doto-SemiBold', sans-serif;
+    font-size: 0.85vw;
     padding: 0.5vw 1.2vw;
     border: 2px solid currentColor;
     background: transparent;
     color: inherit;
     cursor: pointer;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: background 0.15s, color 0.15s;
     text-decoration: none;
     display: inline-block;
@@ -954,16 +965,18 @@ body.fire_mode .maze_player {
     font-size: 4.5vw;
     letter-spacing: 3px;
     margin-bottom: 3%;
-    text-shadow: 0 0 8px #00ff88;
+    text-shadow: 0 0 12px #00ff88, 0 0 30px #00ff8866;
     color: #00ff88;
+    font-family: 'Doto-Bold', sans-serif;
 }
 
 .section-label {
-    font-family: 'Doto-regular', sans-serif;
+    font-family: 'Doto-SemiBold', sans-serif;
     font-size: 2.5vw;
-    color: #888;
+    color: #aaa;
     margin-bottom: 2%;
     text-align: center;
+    letter-spacing: 2px;
 }
 
 /* Difficulté */
@@ -972,14 +985,15 @@ body.fire_mode .maze_player {
 .diff-radio { display: none; }
 
 .diff-btn {
-    font-family: 'Doto-regular', sans-serif;
+    font-family: 'Doto-SemiBold', sans-serif;
     font-size: 2.5vw;
     padding: 1% 2%;
     background: transparent;
-    border: 2px solid #333;
-    color: #666;
+    border: 2px solid #444;
+    color: #999;
     cursor: pointer;
     transition: all 0.15s;
+    letter-spacing: 2px;
 }
 
 .diff-btn:hover { border-color: #00ff88; color: #00ff88; }
@@ -1054,14 +1068,15 @@ body.fire_mode .maze_player {
 .modes-group { display: flex; gap: 5%; margin-bottom: 4%; }
 
 .mode-label {
-    font-family: 'Doto-regular', sans-serif;
+    font-family: 'Doto-SemiBold', sans-serif;
     font-size: 2.2vw;
-    color: #666;
+    color: #999;
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
     transition: color 0.15s;
+    letter-spacing: 1px;
 }
 
 .mode-label input[type="checkbox"] { accent-color: #00ff88; }
@@ -1090,6 +1105,7 @@ body.fire_mode .maze_player {
     background: linear-gradient(to right, transparent, #00ff8844, transparent);
     margin-bottom: 4%;
 }
+
 
 /* 
 ========================

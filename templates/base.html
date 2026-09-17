@@ -37,6 +37,10 @@
             </div>
 
             <form action="{% block form_action %}{% endblock %}" method="POST">
+
+                {# Token CSRF caché — protège contre les attaques cross-site #}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
                 <div class="form-group">
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo" placeholder="WumpusHunter" required>

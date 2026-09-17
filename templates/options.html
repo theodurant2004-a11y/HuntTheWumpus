@@ -21,6 +21,10 @@
         <hr class="options-divider">
 
         <form action="{{ url_for('auth.optionScreen') }}" method="POST" class="pseudo-form">
+
+            {# Token CSRF caché — protège contre les attaques cross-site #}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
             <div class="form-group">
                 <label for="new_pseudo">Nouveau Pseudo :</label>
                 <input type="text" id="new_pseudo" name="new_pseudo" value="{{ session.get('joueur_pseudo') }}">

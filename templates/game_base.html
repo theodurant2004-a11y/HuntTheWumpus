@@ -15,14 +15,14 @@
     {# Overlay fire mode — surchargé par fire.html #}
     {% block fire_mode_overlay %}{% endblock %}
 
-    {# Le labyrinthe prend maintenant tout l'espace de l'iframe #}
+    {# Le labyrinthe prend tout l'espace de l'iframe #}
     <table class="maze_table">
         {% for row in maze %}
             {% set y = loop.index0 %}
             <tr class="maze_tr">
                 {% for unit in row %}
                     {% set x = loop.index0 %}
-                    {% if vision_maze[y][x] == 1 or vision_maze[y][x] == 2 %}
+                    {% if game_over or vision_maze[y][x] == 1 or vision_maze[y][x] == 2 %}
                         <td class="case_type_{{ unit }}">
                             {% if bats[y][x] == 2 and vision_maze[y][x] == 2 %}
                                 <div class="triggered_bat"></div>
@@ -30,9 +30,19 @@
                                 <div class="maze_bat"></div>
                             {% endif %}
                             {% if vision_maze[y][x] == 2 and not bats[y][x] == 2 %}
-                                <div class="maze_player"></div>
+                                {% if coming_from == 99 %}
+                                    <div class="maze_player player-from-top"></div>
+                                {% elif coming_from == 98 %}
+                                    <div class="maze_player player-from-bottom"></div>
+                                {% elif coming_from == 97 %}
+                                    <div class="maze_player player-from-left"></div>
+                                {% elif coming_from == 96 %}
+                                    <div class="maze_player player-from-right"></div>
+                                {% else %}
+                                    <div class="maze_player"></div>
+                                {% endif %}
                             {% endif %}
-                            {# Détection défaite #}
+                            {# Détection défaite par piège — met game_status.lost à true #}
                             {% if vision_maze[y][x] == 2 and (maze[y][x] == 7 or maze[y][x] == 3) %}
                                 {% set game_status.lost = true %}
                             {% endif %}
@@ -47,7 +57,7 @@
 
     {# ---- PANEL DÉFAITE ---- #}
     {% if game_status.lost or game_won == false %}
-        <div class="result-panel lose">
+        <div class="result-panel lose" id="result-panel">
             <p class="result-title">&#9760; GAME OVER</p>
             <p class="result-sub">
                 {% if game_status.lost %}
@@ -56,21 +66,27 @@
                     ta flèche a manqué sa cible...
                 {% endif %}
             </p>
+            <button class="pannel_btn" onclick="document.getElementById('result-panel').style.display='none'">
+                &#128065; Voir le labyrinthe
+            </button>
             <div class="panel-buttons">
                 <a href="{{ url_for('game.gameScreen') }}" class="pannel_btn">&#8634; Rejouer</a>
-                <a href="{{ url_for('game.difficultySelect') }}" class="pannel_btn">&#8962; Menu</a>
+                <a href="{{ url_for('game.podiumScreen') }}" class="pannel_btn" target="_parent">&#8962; Menu</a>
             </div>
         </div>
     {% endif %}
 
     {# ---- PANEL VICTOIRE ---- #}
     {% if game_won == true %}
-        <div class="result-panel win">
+        <div class="result-panel win" id="result-panel">
             <p class="result-title">&#10003; VICTOIRE !</p>
             <p class="result-sub">le wumpus est terrassé !</p>
+            <button class="pannel_btn" onclick="document.getElementById('result-panel').style.display='none'">
+                &#128065; Voir le labyrinthe
+            </button>
             <div class="panel-buttons">
                 <a href="{{ url_for('game.gameScreen') }}" class="pannel_btn">&#8634; Rejouer</a>
-                <a href="{{ url_for('game.difficultySelect') }}" class="pannel_btn">&#8962; Menu</a>
+                <a href="{{ url_for('game.podiumScreen') }}" class="pannel_btn" target="_parent">&#8962; Menu</a>
             </div>
         </div>
     {% endif %}
